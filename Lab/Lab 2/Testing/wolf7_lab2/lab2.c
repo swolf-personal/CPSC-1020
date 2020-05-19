@@ -21,11 +21,9 @@ int main(int argc, char* argv[]){
     FILE* outputP6 = fopen("copyP6.ppm", "w");
     FILE* outputP3 = fopen("copyP3.ppm", "w");
 
-    //Verify that all files opened, if not close everything
-    if (inputP3 == NULL || outputP6 == NULL || outputP3 == NULL){
-        printf("A file failed to open. Terminating the program.");
-        return -1;
-    }
+    /* Add a check to see if the files opened properl *
+     * If any fail to open, you should print a message and *
+     * exit the program */
 
     //Calling the readHeader function
     readHeader(inputP3, &myImage);

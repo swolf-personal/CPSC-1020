@@ -1,3 +1,12 @@
+/* -------------------- /
+Stephen Wolf
+wolf7
+Lab 2
+Section: 001
+Nushrat Humaira
+Alex Myers
+/ -------------------- */
+
 #include "ppm_info.h"
 #include <stdio.h>
 

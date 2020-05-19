@@ -1,3 +1,12 @@
+/* -------------------- /
+Stephen Wolf
+wolf7
+Lab 2
+Section: 001
+Nushrat Humaira
+Alex Myers
+/ -------------------- */
+
 #include <stdlib.h>
 #include <stdio.h>
 /* struct definitions */

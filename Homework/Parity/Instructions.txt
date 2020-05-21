@@ -1,6 +1,13 @@
 DUE ON 5/22
 
-Sometimes even the smallest change in data can make a big difference. Luckily, there are algorithms that will let us not only detect when there has been an error(like checksums), but also correct when an error has occurred. These algorithms are called error-correcting codes.There are many examples of error correcting codes but one of the simplest examples is called a parity bit. A parity bit is just a single bit (1 or 0) that indicates whether a set of values has an even number of 1s (then the bit would be set to 0), or an odd number of 1s (then the bit would be set to 1).If you have a row of 1s and 0s, you can detect whether a single bit has been changed by checking the parity bit. But this won’t tell you anything about where the error is positioned.
+Sometimes even the smallest change in data can make a big difference. 
+Luckily, there are algorithms that will let us not only detect when there has been an error(like checksums), 
+but also correct when an error has occurred. These algorithms are called error-correcting codes.
+There are many examples of error correcting codes but one of the simplest examples is called a parity bit. 
+A parity bit is just a single bit (1 or 0) that indicates whether a set of values has an even number of 1s (then the bit would be set to 0), 
+or an odd number of 1s (then the bit would be set to 1).
+If you have a row of 1s and 0s, you can detect whether a single bit has been changed by checking the parity bit. 
+But this won’t tell you anything about where the error is positioned.
 
 Consider the following array of bits:
 

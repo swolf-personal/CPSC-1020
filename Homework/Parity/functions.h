@@ -44,6 +44,8 @@ void readMatrix(FILE*, int**, int, int);
  *Return:  Returns a pointer to the 2D memory allocated in this function*/
 int** allocateMemory(int, int);
 
+void deallocateMemory(int**, int);
+
 /*This function calculates the parity of the rows of columns
  *Parameters: The int** represents the matrix of 1's and 0's The 2 integers
  *represent the rows and columns. 

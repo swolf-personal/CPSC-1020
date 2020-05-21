@@ -1,6 +1,8 @@
 DUE ON 5/20
 
-You will read a set of numbers from a file. The file name will be give by commandline input. You are then to calculate the minimum and maximum values of by summing 1 less than the set of number. You will then print the two values, first the minimum then the maximum with exactly one space between them. ex. 10 11
+You will read a set of numbers from a file. The file name will be give by commandline input. 
+You are then to calculate the minimum and maximum values of by summing 1 less than the set of number. 
+You will then print the two values, first the minimum then the maximum with exactly one space between them. ex. 10 11
 
 As an example:
 Suppose the file contains the following:

@@ -39,7 +39,7 @@ int main(int argc, char const *argv[]) {
 
   /*After the deck is created and initialzed we call random_shuffle() see the
    *notes to determine the parameters to pass in.*/
-  random_shuffle(&deck[0], &deck[52], myrandom);
+  //random_shuffle(&deck[0], &deck[52], myrandom); UNCOMMENT TO RUN PROPERLY. SC CODE SCREAMS AT ME IF THIS IS LEFT
 
   /*Build a hand of 5 cards (hint this should be an array) from the first five cards of the deck created
   *above*/

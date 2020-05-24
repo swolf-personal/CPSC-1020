@@ -8,13 +8,19 @@
 
 vector<char> readData(ifstream& in)
 {
-    
+    char tempStore;
+    vector<char> readString;
+    while (in >> tempStore)
+        readString.push_back(tempStore);
+    return readString;
 }
 /*This function calls the floor and ceil functions from the cmath
  *library*/
 void findFloorCeiling(int& r, int& c, int size)
 {
-    
+    *r = floor(sqrt(size));
+    *c = ceil(sqrt(size));
+    cout << *r << "  " << *c << endl;
 }
 
 /*This function is what encrypts the data.*/

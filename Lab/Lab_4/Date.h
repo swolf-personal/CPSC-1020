@@ -1,3 +1,12 @@
+/* -------------------- /
+Stephen Wolf
+wolf7
+Lab 4
+Section: 001
+Nushrat Humaira
+Alex Myers
+/ -------------------- */
+
 #ifndef DATE_H
 #define DATE_H
 

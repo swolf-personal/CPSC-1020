@@ -12,7 +12,8 @@ Alex Myers
 // Just an array of strings. Access a month using:
 // Date::MONTHS[0] ---> "JANUARY"
 // GLOBAL TO THE CLASS
-// Also, why is this const? Months don't change
+// Also, why is this const? 
+//  Months don't change
 const string Date::MONTHS[] = {
   "JANUARY", "FEBRUARY", "MARCH", "APRIL", "MAY",
   "JUNE", "JULY", "AUGUST", "SEPTEMBER", "OCTOBER",
@@ -48,7 +49,8 @@ bool Date::compare(const Date& lhs, const Date& rhs) {
 }
 
 // Sample getter/setter
-// What does this const mean?
+// What does this const mean? 
+//  The function is not expected or allowed to change member data
 
 int Date::get_day() const {
   return this->day;
@@ -74,12 +76,7 @@ void Date::set_year(int year) {
 string Date::print() {
   stringstream outputStream;
 
-  outputStream << left << setw(10) << MONTHS[this->month] << setw(3) << this->day << setw(5) << this->year;
+  outputStream << left << setw(10) << MONTHS[(this->month-1)] << setw(3) << this->day << setw(5) << this->year << endl;
 
   return outputStream.str();
 }
-
-// IMPLEMENT OTHER METHODS HERE
-//  * * * *
-//  * * * *
-//  * * * *

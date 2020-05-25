@@ -48,6 +48,7 @@ public:
     int get_year() const;
     void set_year(int year);
     
+    //Return a properly formatted string to be output
     string print();
 };
 

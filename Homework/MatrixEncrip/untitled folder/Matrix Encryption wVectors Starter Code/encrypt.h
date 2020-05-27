@@ -9,5 +9,5 @@ vector<char> readData(ifstream& );
 
 void findFloorCeiling(int&, int&, int);
 
-void Encrypt(vector<char>, int, int);
+void Encrypt(vector<char>, int);
 

@@ -49,17 +49,8 @@ int main(int argc, char const *argv[]) {
         cin >> imageHeight;
     }
 
-    //cout << "Entered Width: " << imageWidth << " Entered Height: " << imageHeight << endl;
-
     //P5 Image
-    Point startPoint;
-    startPoint.x = 0;
-    startPoint.y = 0;
-    Point endPoint;
-    endPoint.x = imageWidth; // Check that these are in the correct order
-    endPoint.y = imageHeight; // and that they don't need to be decremented
-
-    ImageP5 greyscaleImage(imageWidth, imageHeight, startPoint, endPoint);
+    ImageP5 greyscaleImage(imageWidth, imageHeight);
 
     //Populate greyscale from 0 to 255
     greyscaleImage.fill();

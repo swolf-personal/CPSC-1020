@@ -38,7 +38,7 @@ class ImageP5{
         int calcGreyscale(int);     
     
     public:
-        ImageP5(int, int, Point, Point);     
+        ImageP5(int, int);     
         void fill();      
         void print(ofstream&);
 };

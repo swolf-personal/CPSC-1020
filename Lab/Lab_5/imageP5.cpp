@@ -19,14 +19,14 @@ Alex Myers
 
 using namespace std;
 
-ImageP5::ImageP5(int w, int h, Point start, Point end) : 
+ImageP5::ImageP5(int w, int h) : 
 width(w), height(h){
     
     startPoint.x = 0;
     startPoint.y = 0;
 
-    endPoint.x = width; // Check that these are in the correct order
-    endPoint.y = height; // and that they don't need to be decremented
+    endPoint.x = width;
+    endPoint.y = height;
     
     longestDist = calcDist(startPoint, endPoint);
 }

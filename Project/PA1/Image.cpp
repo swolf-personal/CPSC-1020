@@ -125,12 +125,13 @@ void Collage::flatten() {
   for(Image& layer : layers){
     for (int i = 0; i < layer.getHeader().getHeight(); i++) {
       for (int j = 0; j < layer.getHeader().getWidth(); j++) {
-        image.getPixel(i+200,j+150) = layer.getPixel(i,j);
+        image.getPixel(i,j) = layer.getPixel(i,j);
       }
     }
   }
 }
 
+//DONT TOUCH THIS
 void Collage::resizeLayer(Image& im, int trgH, int trgW) {
   //Image imOG = im;
   Image newImage;
@@ -148,28 +149,38 @@ void Collage::resizeLayer(Image& im, int trgH, int trgW) {
     for (int j = 0; j < trgW; j++)
     {
       //im.getPixel takes the h and w locations and returns a pixel reference
-      newImage.getPixel(i,j) = im.getPixel((int)(i*relHeight), (int)(j*relWidth));
-      //pixelsNew.at(i).at(j) = pixelsOld.at((int)(i * relHeight)).at((int)(j * relWidth)); 
+      //newImage.getPixel(i,j) = im.getPixel((int)(i*relHeight), (int)(j*relWidth));
+      pixelsNew.at(i).at(j) = pixelsOld.at((int)(i * relHeight)).at((int)(j * relWidth)); 
         
     }
   }
-  ofstream outStream("testingNewImg.ppm");
-  newImage.setPixels(pixelsNew);
-  newImage.writeImage(outStream);
+  //ofstream outStream("testingNewImg.ppm");
+  im.setDimensions(trgH, trgW);
+  im.setPixels(pixelsNew);
+  //newImage.writeImage(outStream);
   return;
 }
 
 void Collage::createCollage() {
   /*
-  for (int i = 0; i < 5; i++)
+  for (int i = 0; i < 3; i++)
   {
     Image duplicateImage = image;
-    resizeLayer(duplicateImage, 400, 300);
+    if(i != 0)
+      resizeLayer(duplicateImage, 600/i, 800/i);
     layers.push_back(duplicateImage);
-  }
+  } */
+  Image im1 = image;
+  resizeLayer(im1, 300, 400);
+  layers.push_back(im1);
+
+  Image im2 = image;
+  resizeLayer(im2, 150, 200);
+  layers.push_back(im2);
+
   flatten();
-  */
-  resizeLayer(image, 300, 400);
+  
+  //resizeLayer(image, 300, 400);
 }
 
 //END COLLAGE

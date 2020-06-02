@@ -7,6 +7,9 @@ wolf7@clemson.edu
 #include "Image.h"
 
 // HEADER
+
+Header::Header() {}
+
 void Header::setMagicChar(char mChar) {magicChar = mChar;}
 void Header::setWidth(int w) {width = w;}
 void Header::setHeight(int h) { height = h;}

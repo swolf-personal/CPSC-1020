@@ -84,7 +84,7 @@ class Image
 
 class Collage{
   private:
-    Header hdr;
+    //Header hdr;
     Image image;
     vector<Image> layers;
 

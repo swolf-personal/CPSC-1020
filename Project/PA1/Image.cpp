@@ -14,7 +14,7 @@ void Header::setMagicChar(string mChar) {magicChar = mChar;}
 void Header::setWidth(int w) {width = w;}
 void Header::setHeight(int h) { height = h;}
 void Header::setMaxVal(int mVal) {maxVal = mVal;}
-void Header::setAll(string mChar, int w, int h, int mVal){
+void Header::setAll(string mChar, int h, int w, int mVal){
   magicChar = mChar;
   width = w;
   height = h;
@@ -46,7 +46,11 @@ void Pixel::setB(int b) {this->b = b;}
 
 //IMAGE
 
-Image::Image() {}
+Image::Image() {
+  hdr.setMagicChar("P3");
+  hdr.setHeight(0);
+  hdr.setWidth(0);
+}
 
 Image::Image(ifstream& in) {
   readHeader(in);
@@ -67,6 +71,7 @@ void Image::readHeader(ifstream& in) {
   string magic;
   int width, height, maxVal;
   in >> magic >> width >> height >> maxVal;
+  in.ignore(256,'\n');
   hdr.setAll(magic, height, width, maxVal);
 }
 
@@ -91,7 +96,7 @@ void Image::readPixels(ifstream& in) {
 
 void Image::writeImage(ofstream& out) {
   out << hdr.getMagicChar() << endl; 
-  out << hdr.getHeight() << " " << hdr.getWidth() << endl;
+  out << hdr.getWidth() << " " << hdr.getHeight() << " ";
   out << hdr.getMaxVal() << endl;
 
   for(auto& pixelCol : pixels) {
@@ -113,7 +118,7 @@ void Collage::readImage(ifstream& in) {
   image.readPixels(in);
 }
 
-void Collage::writeImage(ofstream& in) {image.writeImage(in);}
+void Collage::writeImage(ofstream& out) {image.writeImage(out);}
 
 void Collage::flatten() {
   for(Image& layer : layers){
@@ -126,19 +131,30 @@ void Collage::flatten() {
 }
 
 void Collage::resizeLayer(Image& im, int trgH, int trgW) {
-  Image imOG = im;
-  double relHeight = im.getHeader().getHeight() / trgH;
-  double relWidth = im.getHeader().getWidth() / trgW;
+  //Image imOG = im;
+  Image newImage;
+  newImage.setDimensions(trgH, trgW);
+  double relHeight = (double)im.getHeader().getHeight() / trgH;
+  //cout << "Height: " << im.getHeader().getHeight() << " Width " << im.getHeader().getWidth() << endl;
+  double relWidth = (double)im.getHeader().getWidth() / trgW;
 
-  im.setDimensions(trgH, trgW);
+  //im.setDimensions(trgH, trgW);
+  vector<vector<Pixel>> pixelsOld = im.getPixels();
+  vector<vector<Pixel>> pixelsNew = newImage.getPixels();
+
   for (int i = 0; i < trgH; i++)
   {
     for (int j = 0; j < trgW; j++)
     {
       //im.getPixel takes the h and w locations and returns a pixel reference
-      im.getPixel(i,j) = imOG.getPixel((int)(i*relHeight), (int)(j*relWidth));
+      newImage.getPixel(i,j) = im.getPixel((int)(i*relHeight), (int)(j*relWidth));
+      //pixelsNew.at(i).at(j) = pixelsOld.at((int)(i * relHeight)).at((int)(j * relWidth)); 
+        
     }
   }
+  ofstream outStream("testingNewImg.ppm");
+  newImage.setPixels(pixelsNew);
+  newImage.writeImage(outStream);
   return;
 }
 
@@ -152,7 +168,7 @@ void Collage::createCollage() {
   }
   flatten();
   */
-  resizeLayer(image, 400, 300);
+  resizeLayer(image, 300, 400);
 }
 
 //END COLLAGE

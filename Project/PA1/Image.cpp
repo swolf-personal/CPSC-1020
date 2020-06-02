@@ -25,6 +25,22 @@ int Header::getMaxVal() {return maxVal;}
 
 //END HEADER
 
+//PIXEL
+
+Pixel::Pixel() {}
+
+Pixel::Pixel(int r, int g, int b) {}
+
+int Pixel::getR() {return r;}
+int Pixel::getG() {return g;}
+int Pixel::getB() {return b;}
+
+void Pixel::setR(int r) {this->r = r;}
+void Pixel::setG(int g) {this->g = g;}
+void Pixel::setB(int b) {this->b = b;}
+
+//END PIXEL
+
 //IMAGE
 
 Image::Image() {}
@@ -35,6 +51,10 @@ Image::Image(ifstream& in) {
   readHeader(in);
   readPixels(in);
 }
+
+Header& Image::getHeader() {return hdr;}
+
+Pixel& Image::getPixel(int x, int y) { return pixels.at(x).at(y); }
 
 void Image::readHeader(ifstream& in) {
   char magic;
@@ -50,21 +70,25 @@ void Image::setDimensions(int h, int w) {
   pixels.resize(h, vector<Pixel>(w));
 }
 
-Header& Image::getHeader() {return hdr;}
-
-Pixel& Image::getPixel(int x, int y) { return pixels.at(x).at(y); }
-
 void Image::readPixels(ifstream& in) {
   setDimensions(hdr.getHeight(), hdr.getWidth());
+
+  for(auto& pixCol : pixels){
+    for(auto& pix : pixCol) {
+      int r, g, b;
+      in >> r >> g >> b;
+      pix = Pixel(r,g,b);
+    }
+  }
 }
 
-void Image::resizeImage(Image& oldImage, Image& newImage) {}
-
 void Image::writeImage(ofstream& out) {
-  out << hdr.getMagicChar() << endl << hdr.getWidth() << " " << hdr.getHeight() << endl << hdr.getMaxVal() << endl;
+  out << hdr.getMagicChar() << endl; 
+  out << hdr.getWidth() << " " << hdr.getHeight() << endl;
+  out << hdr.getMaxVal() << endl;
 
-  for(vector<Pixel> pixelCol : pixels) {
-    for(Pixel pixel : pixelCol) {
+  for(auto& pixelCol : pixels) {
+    for(auto& pixel : pixelCol) {
       out << pixel.getR() << " " << pixel.getG() << " " << pixel.getB() << " "; // TODO - decide P3, P6
     }
   }

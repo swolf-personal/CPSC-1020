@@ -19,9 +19,12 @@ using namespace std;
 
 int main(int argc, char const *argv[]) {
   ifstream inStream("copyP3.ppm");
+  ofstream outFile("plsWork.ppm");
   Collage newCollage;
 
   newCollage.readImage(inStream);
+  newCollage.createCollage();
+  newCollage.writeImage(outFile);
 
   return 0;
 }

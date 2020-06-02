@@ -43,11 +43,16 @@ class Pixel {
     int g;
     int b;
   public:
+    Pixel();
     Pixel(int, int, int);
 
     int getR();
     int getG();
     int getB();
+
+    void setR(int);
+    void setG(int);
+    void setB(int);
 };
 
 class Image
@@ -70,7 +75,6 @@ class Image
     void readPixels(ifstream&);
     
     void writeImage(ofstream&);
-    void resizeImage(Image& oldImage, Image& newImage);
 };
 
 class Collage{

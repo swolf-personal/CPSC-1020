@@ -4,6 +4,9 @@ CPSC 1020, Summer 20
 wolf7@clemson.edu
 / -------------------- */
 
+#ifndef IMAGE_H
+#define IMAGE_H
+
 #include <algorithm>
 #include <math.h>
 #include <stdio.h>
@@ -59,22 +62,21 @@ class Image
 {
   private:
     Header hdr;
-    vector<vector<Pixel>> pixels;
+    vector<vector<Pixel> > pixels;
 
   public:
     Image();
-    Image(string, int, int);
     Image(ifstream&);
     
     void readHeader(ifstream&);
     Header& getHeader();
 
     void setDimensions(int, int);
-    void setPixels(vector<vector<Pixel>>);
+    void setPixels(vector<vector<Pixel> >);
     
     Pixel& getPixel (int, int);
     void setPixel(int,int, Pixel);
-    vector<vector<Pixel>> getPixels();
+    vector<vector<Pixel> > getPixels();
     void readPixels(ifstream&);
     
     void writeImage(ofstream&);
@@ -101,3 +103,5 @@ class Collage{
     //Read
     void readImage(ifstream&);
 };
+
+#endif

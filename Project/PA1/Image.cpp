@@ -6,7 +6,7 @@ wolf7@clemson.edu
 
 #include "Image.h"
 
-// HEADER
+//HEADER
 
 Header::Header() {}
 
@@ -48,8 +48,6 @@ void Pixel::setB(int b) {this->b = b;}
 
 Image::Image() {}
 
-Image::Image(string, int, int) {}
-
 Image::Image(ifstream& in) {
   readHeader(in);
   readPixels(in);
@@ -57,7 +55,13 @@ Image::Image(ifstream& in) {
 
 Header& Image::getHeader() {return hdr;}
 
-Pixel& Image::getPixel(int x, int y) { return pixels.at(x).at(y); }
+Pixel& Image::getPixel(int x, int y) { return pixels.at(x).at(y);}
+
+vector<vector<Pixel>> Image::getPixels() {return pixels;}
+
+void Image::setPixels(vector<vector<Pixel>> pixels) {this->pixels = pixels;}
+
+void Image::setPixel(int h, int w, Pixel change) {pixels.at(h).at(w) = change;}
 
 void Image::readHeader(ifstream& in) {
   string magic;
@@ -69,10 +73,6 @@ void Image::readHeader(ifstream& in) {
 void Image::setDimensions(int h, int w) {
   hdr.setHeight(h);
   hdr.setWidth(w);
-
-  //pixels.clear();
-  vector<vector<Pixel>> newPixels;
-  pixels = newPixels;
 
   pixels.resize(h, vector<Pixel>(w));
 }
@@ -96,21 +96,9 @@ void Image::writeImage(ofstream& out) {
 
   for(auto& pixelCol : pixels) {
     for(auto& pixel : pixelCol) {
-      out << pixel.getR() << " " << pixel.getG() << " " << pixel.getB() << " "; // TODO - decide P3, P6
+      out << pixel.getR() << " " << pixel.getG() << " " << pixel.getB() << " ";
     }
   }
-}
-
-vector<vector<Pixel>> Image::getPixels() {
-  return pixels;
-}
-
-void Image::setPixels(vector<vector<Pixel>> pixels) {
-  this->pixels = pixels;
-}
-
-void Image::setPixel(int h, int w, Pixel change) {
-  pixels.at(h).at(w) = change;
 }
 
 //END IMAGE
@@ -119,40 +107,22 @@ void Image::setPixel(int h, int w, Pixel change) {
 
 Collage::Collage() {}
 
+
+void Collage::readImage(ifstream& in) {
+  image.readHeader(in);
+  image.readPixels(in);
+}
+
+void Collage::writeImage(ofstream& in) {image.writeImage(in);}
+
 void Collage::flatten() {
-  //cout << "flat" << endl;
   for(Image& layer : layers){
-    //cout << "flat range" << endl;
     for (int i = 0; i < layer.getHeader().getHeight(); i++) {
-      //cout << "flat upper" << endl;
       for (int j = 0; j < layer.getHeader().getWidth(); j++) {
-        //cout << "flat lower" << endl;
         image.getPixel(i+200,j+150) = layer.getPixel(i,j);
       }
     }
   }
-  cout << "flat" << endl;
-  //image = layers.at(0);
-  cout << "flat" << endl;
-}
-
-void Collage::writeImage(ofstream& in) {
-  image.writeImage(in);
-}
-
-void Collage::createCollage() {
-  //cout << "CC" << endl;
-  /*
-  for (int i = 0; i < 5; i++)
-  {
-    Image duplicateImage = image;
-    resizeLayer(duplicateImage, 400, 300);
-    layers.push_back(duplicateImage);
-  }
-  flatten();
-  */
-  resizeLayer(image, 400, 300);
-  //cout << "CC" << endl;
 }
 
 void Collage::resizeLayer(Image& im, int trgH, int trgW) {
@@ -172,11 +142,17 @@ void Collage::resizeLayer(Image& im, int trgH, int trgW) {
   return;
 }
 
-void Collage::readImage(ifstream& in) {
-  image.readHeader(in);
-  image.readPixels(in);
-
-  //layers.push_back(image);
+void Collage::createCollage() {
+  /*
+  for (int i = 0; i < 5; i++)
+  {
+    Image duplicateImage = image;
+    resizeLayer(duplicateImage, 400, 300);
+    layers.push_back(duplicateImage);
+  }
+  flatten();
+  */
+  resizeLayer(image, 400, 300);
 }
 
 //END COLLAGE

@@ -1,0 +1,7 @@
+My first problem was thinking too linearly in reguards to the class structure.
+I then made the choice to create an object which would contain the object
+because the collage would be made of multiple images.
+
+I used inspiration from most photo editors like photoshop who allow you to make
+edits, and allow multiple layers on the same image. However, at time of export
+it requires that you flatten into one layer which now makes more sense to me.

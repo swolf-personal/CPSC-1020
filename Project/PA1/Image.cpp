@@ -10,18 +10,18 @@ wolf7@clemson.edu
 
 Header::Header() {}
 
-void Header::setMagicChar(char mChar) {magicChar = mChar;}
+void Header::setMagicChar(string mChar) {magicChar = mChar;}
 void Header::setWidth(int w) {width = w;}
 void Header::setHeight(int h) { height = h;}
 void Header::setMaxVal(int mVal) {maxVal = mVal;}
-void Header::setAll(char mChar, int w, int h, int mVal){
+void Header::setAll(string mChar, int w, int h, int mVal){
   magicChar = mChar;
   width = w;
   height = h;
   maxVal = mVal;
 }
 
-int Header::getMagicChar() {return magicChar;}
+string Header::getMagicChar() {return magicChar;}
 int Header::getWidth() {return width;}
 int Header::getHeight() {return height;}
 int Header::getMaxVal() {return maxVal;}
@@ -32,7 +32,7 @@ int Header::getMaxVal() {return maxVal;}
 
 Pixel::Pixel() {}
 
-Pixel::Pixel(int r, int g, int b) {}
+Pixel::Pixel(int rIn, int gIn, int bIn) : r(rIn), b(bIn), g(gIn) {}
 
 int Pixel::getR() {return r;}
 int Pixel::getG() {return g;}
@@ -60,15 +60,19 @@ Header& Image::getHeader() {return hdr;}
 Pixel& Image::getPixel(int x, int y) { return pixels.at(x).at(y); }
 
 void Image::readHeader(ifstream& in) {
-  char magic;
+  string magic;
   int width, height, maxVal;
   in >> magic >> width >> height >> maxVal;
-  hdr.setAll(magic, width, height, maxVal);
+  hdr.setAll(magic, height, width, maxVal);
 }
 
 void Image::setDimensions(int h, int w) {
   hdr.setHeight(h);
   hdr.setWidth(w);
+
+  //pixels.clear();
+  vector<vector<Pixel>> newPixels;
+  pixels = newPixels;
 
   pixels.resize(h, vector<Pixel>(w));
 }
@@ -87,7 +91,7 @@ void Image::readPixels(ifstream& in) {
 
 void Image::writeImage(ofstream& out) {
   out << hdr.getMagicChar() << endl; 
-  out << hdr.getWidth() << " " << hdr.getHeight() << endl;
+  out << hdr.getHeight() << " " << hdr.getWidth() << endl;
   out << hdr.getMaxVal() << endl;
 
   for(auto& pixelCol : pixels) {
@@ -97,6 +101,18 @@ void Image::writeImage(ofstream& out) {
   }
 }
 
+vector<vector<Pixel>> Image::getPixels() {
+  return pixels;
+}
+
+void Image::setPixels(vector<vector<Pixel>> pixels) {
+  this->pixels = pixels;
+}
+
+void Image::setPixel(int h, int w, Pixel change) {
+  pixels.at(h).at(w) = change;
+}
+
 //END IMAGE
 
 //COLLAGE
@@ -104,14 +120,20 @@ void Image::writeImage(ofstream& out) {
 Collage::Collage() {}
 
 void Collage::flatten() {
+  //cout << "flat" << endl;
   for(Image& layer : layers){
+    //cout << "flat range" << endl;
     for (int i = 0; i < layer.getHeader().getHeight(); i++) {
+      //cout << "flat upper" << endl;
       for (int j = 0; j < layer.getHeader().getWidth(); j++) {
-        image.getPixel(i,j) = layer.getPixel(i,j);
+        //cout << "flat lower" << endl;
+        image.getPixel(i+200,j+150) = layer.getPixel(i,j);
       }
     }
   }
-  image = layers.at(0);
+  cout << "flat" << endl;
+  //image = layers.at(0);
+  cout << "flat" << endl;
 }
 
 void Collage::writeImage(ofstream& in) {
@@ -119,13 +141,18 @@ void Collage::writeImage(ofstream& in) {
 }
 
 void Collage::createCollage() {
+  //cout << "CC" << endl;
+  /*
   for (int i = 0; i < 5; i++)
   {
     Image duplicateImage = image;
-    resizeLayer(duplicateImage, 50, 50);
+    resizeLayer(duplicateImage, 400, 300);
     layers.push_back(duplicateImage);
   }
   flatten();
+  */
+  resizeLayer(image, 400, 300);
+  //cout << "CC" << endl;
 }
 
 void Collage::resizeLayer(Image& im, int trgH, int trgW) {
@@ -138,7 +165,8 @@ void Collage::resizeLayer(Image& im, int trgH, int trgW) {
   {
     for (int j = 0; j < trgW; j++)
     {
-      im.getPixel(i,j) = imOG.getPixel(i*relHeight,j*relWidth);
+      //im.getPixel takes the h and w locations and returns a pixel reference
+      im.getPixel(i,j) = imOG.getPixel((int)(i*relHeight), (int)(j*relWidth));
     }
   }
   return;
@@ -147,6 +175,8 @@ void Collage::resizeLayer(Image& im, int trgH, int trgW) {
 void Collage::readImage(ifstream& in) {
   image.readHeader(in);
   image.readPixels(in);
+
+  //layers.push_back(image);
 }
 
 //END COLLAGE

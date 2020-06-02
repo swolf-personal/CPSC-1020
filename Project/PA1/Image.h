@@ -17,7 +17,7 @@ using namespace std;
 
 class Header {
   private:
-    char magicChar;
+    string magicChar;
     int width;
     int height;
     int maxVal;
@@ -25,13 +25,13 @@ class Header {
   public:
     Header();
 
-    void setMagicChar(char);
+    void setMagicChar(string);
     void setWidth(int);
     void setHeight(int);
     void setMaxVal(int);
-    void setAll(char, int, int, int);
+    void setAll(string, int, int, int);
 
-    int getMagicChar();
+    string getMagicChar();
     int getWidth();
     int getHeight();
     int getMaxVal();
@@ -70,8 +70,11 @@ class Image
     Header& getHeader();
 
     void setDimensions(int, int);
+    void setPixels(vector<vector<Pixel>>);
     
     Pixel& getPixel (int, int);
+    void setPixel(int,int, Pixel);
+    vector<vector<Pixel>> getPixels();
     void readPixels(ifstream&);
     
     void writeImage(ofstream&);

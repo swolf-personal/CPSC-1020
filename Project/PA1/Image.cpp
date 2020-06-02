@@ -50,6 +50,7 @@ Image::Image() {
   hdr.setMagicChar("P3");
   hdr.setHeight(0);
   hdr.setWidth(0);
+  hdr.setMaxVal(255);
 }
 
 Image::Image(ifstream& in) {

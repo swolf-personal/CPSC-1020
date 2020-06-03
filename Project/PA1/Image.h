@@ -68,17 +68,31 @@ class Image
     Image();
     Image(ifstream&);
     
+    //Self documenting?
     void readHeader(ifstream&);
+    //Hopefully still self documenting
     Header& getHeader();
 
+    //Sets width and height in header and resizes
+    //Param: int height, int width
+    //Return: Void
     void setDimensions(int, int);
-    void setPixels(vector<vector<Pixel> >);
     
+    //Returns pixel at the coordinates
+    //Param: int height, int width
+    //Return: Pixel&
     Pixel& getPixel (int, int);
+    //Sets a pixel at a point
+    //Param: int height, int width, Pixel pixel
+    //Return: Void
     void setPixel(int,int, Pixel);
-    vector<vector<Pixel> > getPixels();
+    //Reads pixel data from a file
+    //Param: ifstream&
+    //Return: Void
     void readPixels(ifstream&);
-    
+    //Smart write to a file
+    //Param: ofstream&
+    //Return: Void
     void writeImage(ofstream&);
 };
 
@@ -91,9 +105,9 @@ class Collage{
 
   public:
     //Allows collage to be default constructed
-    Collage();
+    //Collage();
     //Saves space in driver by handling input
-    Collage(string);
+    Collage(ifstream&);
     //Required call before printing. Consolidates layers
     //Similar idea as most digital editors
     //Param: None | Return: Void

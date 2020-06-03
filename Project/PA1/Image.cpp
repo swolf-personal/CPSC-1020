@@ -46,13 +46,6 @@ void Pixel::setB(int b) {this->b = b;}
 
 //IMAGE
 
-Image::Image() {
-  hdr.setMagicChar("P3");
-  hdr.setHeight(0);
-  hdr.setWidth(0);
-  hdr.setMaxVal(255);
-}
-
 Image::Image(ifstream& in) {
   readHeader(in);
   readPixels(in);
@@ -62,11 +55,14 @@ Header& Image::getHeader() {return hdr;}
 
 Pixel& Image::getPixel(int x, int y) { return pixels.at(x).at(y);}
 
-vector<vector<Pixel>> Image::getPixels() {return pixels;}
-
-void Image::setPixels(vector<vector<Pixel>> pixels) {this->pixels = pixels;}
-
 void Image::setPixel(int h, int w, Pixel change) {pixels.at(h).at(w) = change;}
+
+void Image::setDimensions(int h, int w) {
+  hdr.setHeight(h);
+  hdr.setWidth(w);
+
+  pixels.resize(h, vector<Pixel>(w));
+}
 
 void Image::readHeader(ifstream& in) {
   string magic;
@@ -74,13 +70,6 @@ void Image::readHeader(ifstream& in) {
   in >> magic >> width >> height >> maxVal;
   in.ignore(256,'\n');
   hdr.setAll(magic, height, width, maxVal);
-}
-
-void Image::setDimensions(int h, int w) {
-  hdr.setHeight(h);
-  hdr.setWidth(w);
-
-  pixels.resize(h, vector<Pixel>(w));
 }
 
 void Image::readPixels(ifstream& in) {
@@ -105,11 +94,10 @@ void Image::readPixels(ifstream& in) {
 }
 
 void Image::writeImage(ofstream& out) {
+  out << hdr.getMagicChar() << endl; 
+  out << hdr.getWidth() << " " << hdr.getHeight() << " ";
+  out << hdr.getMaxVal() << endl;
   if(hdr.getMagicChar() == "P3") {
-    out << hdr.getMagicChar() << endl; 
-    out << hdr.getWidth() << " " << hdr.getHeight() << " ";
-    out << hdr.getMaxVal() << endl;
-
     for(auto& pixelCol : pixels) {
       for(auto& pixel : pixelCol) {
         out << pixel.getR() << " ";
@@ -118,10 +106,6 @@ void Image::writeImage(ofstream& out) {
       }
     }
   } else if(hdr.getMagicChar() == "P6") {
-    out << hdr.getMagicChar() << endl; 
-    out << hdr.getWidth() << " " << hdr.getHeight() << " ";
-    out << hdr.getMaxVal() << endl;
-
     for(auto& pixelCol : pixels) {
       for(auto& pixel : pixelCol) {
         out << static_cast<unsigned char>(pixel.getR());
@@ -136,15 +120,7 @@ void Image::writeImage(ofstream& out) {
 
 //COLLAGE
 
-Collage::Collage() {}
-
-Collage::Collage(string inName) {
-  ifstream in(inName);
-
-  readImage(in);
-
-  in.close();
-}
+Collage::Collage(ifstream& in) : image(in){}
 
 void Collage::readImage(ifstream& in) {
   image.readHeader(in);

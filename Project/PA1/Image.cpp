@@ -85,12 +85,21 @@ void Image::setDimensions(int h, int w) {
 
 void Image::readPixels(ifstream& in) {
   setDimensions(hdr.getHeight(), hdr.getWidth());
-
-  for(auto& pixCol : pixels){
-    for(auto& pix : pixCol) {
-      int r, g, b;
-      in >> r >> g >> b;
-      pix = Pixel(r,g,b);
+  if(hdr.getMagicChar() == "P3") {
+    for(auto& pixCol : pixels){
+      for(auto& pix : pixCol) {
+        int r, g, b;
+        in >> r >> g >> b;
+        pix = Pixel(r,g,b);
+      }
+    }
+  } else if(hdr.getMagicChar() == "P6") {
+    for(auto& pixCol : pixels){
+      for(auto& pix : pixCol) {
+        char r, g, b;
+        in >> r >> g >> b;
+        pix = Pixel((int)r,(int)g,(int)b);
+      }
     }
   }
 }
@@ -103,11 +112,23 @@ void Image::writeImage(ofstream& out) {
 
     for(auto& pixelCol : pixels) {
       for(auto& pixel : pixelCol) {
-        out << pixel.getR() << " " << pixel.getG() << " " << pixel.getB() << " ";
+        out << pixel.getR() << " ";
+        out << pixel.getG() << " ";
+        out << pixel.getB() << " ";
       }
     }
   } else if(hdr.getMagicChar() == "P6") {
-    
+    out << hdr.getMagicChar() << endl; 
+    out << hdr.getWidth() << " " << hdr.getHeight() << " ";
+    out << hdr.getMaxVal() << endl;
+
+    for(auto& pixelCol : pixels) {
+      for(auto& pixel : pixelCol) {
+        out << static_cast<unsigned char>(pixel.getR());
+        out << static_cast<unsigned char>(pixel.getG());
+        out << static_cast<unsigned char>(pixel.getB());
+      }
+    }
   }
 }
 
@@ -143,19 +164,23 @@ void Collage::resizeLayer(Image& im, int trgH, int trgW) {
 
   im.setDimensions(trgH, trgW);
   for (int i = 0; i < trgH; i++)
-    for (int j = 0; j < trgW; j++)
-      im.getPixel(i,j) = imOriginal.getPixel((int)(i*relHeight), (int)(j*relWidth));
+    for (int j = 0; j < trgW; j++) {
+      int newHeight = static_cast<int>(i*relHeight);
+      int newWidth = static_cast<int>(j*relWidth);
+      im.getPixel(i,j) = imOriginal.getPixel(newHeight, newWidth);
+    }
   return;
 }
 
 void Collage::createCollage() {
-  Image im1 = image;
-  resizeLayer(im1, 400, 600);
-  layers.push_back(im1);
+  int canvasWidth = image.getHeader().getWidth();
+  int canvasHeight = image.getHeader().getHeight();
 
-  Image im2 = image;
-  resizeLayer(im2, 200, 300);
-  layers.push_back(im2);
+  for(int i = 1; i < 10; i++){
+    Image newLayer = image;
+    resizeLayer(newLayer, canvasHeight/i, canvasWidth/i);
+    layers.push_back(newLayer);
+  }
 
   flatten();
 }

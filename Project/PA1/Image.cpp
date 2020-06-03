@@ -87,7 +87,8 @@ void Image::readPixels(ifstream& in) {
       for(auto& pix : pixCol) {
         unsigned char r, g, b;
         in >> r >> g >> b;
-        pix = Pixel(static_cast<int>(r),static_cast<int>(g),static_cast<int>(b));
+        pix = 
+        Pixel(static_cast<int>(r),static_cast<int>(g),static_cast<int>(b));
       }
     }
   }

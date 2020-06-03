@@ -5,3 +5,9 @@ because the collage would be made of multiple images.
 I used inspiration from most photo editors like photoshop who allow you to make
 edits, and allow multiple layers on the same image. However, at time of export
 it requires that you flatten into one layer which now makes more sense to me.
+
+Then I encountered the mess of errors with my resize function that launched
+me into an epic multi day conquest. Only after hours of relentless struggle
+did the TAs help me discover I had the height and width params mixed around.
+So that was fun.
+

@@ -18,14 +18,27 @@ wolf7@clemson.edu
 using namespace std;
 
 int main(int argc, char const *argv[]) {
-  ifstream inStream("testP3.ppm");
-  ofstream outFile("outP3.ppm");
-  Collage p3Collage;
-  p3Collage.readImage(inStream);
-  p3Collage.createCollage();
-  p3Collage.writeImage(outFile);
-  inStream.close();
-  outFile.close();
+  ifstream inCaseOne("testP3.ppm");
+  ofstream outCaseOne("outP3.ppm");
+  
+  Collage testCaseOne;
+  testCaseOne.readImage(inCaseOne);
+  testCaseOne.createCollage();
+  testCaseOne.writeImage(outCaseOne);
+  
+  inCaseOne.close();
+  outCaseOne.close();
+
+  ifstream inCaseTwo("testP6.ppm");
+  ofstream outCaseTwo("outP6.ppm");
+
+  Collage testCaseTwo;
+  testCaseTwo.readImage(inCaseTwo);
+  testCaseTwo.createCollage();
+  testCaseTwo.writeImage(outCaseTwo);
+  
+  inCaseTwo.close();
+  outCaseTwo.close();
 
   return 0;
 }

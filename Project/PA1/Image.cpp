@@ -96,9 +96,9 @@ void Image::readPixels(ifstream& in) {
   } else if(hdr.getMagicChar() == "P6") {
     for(auto& pixCol : pixels){
       for(auto& pix : pixCol) {
-        char r, g, b;
+        unsigned char r, g, b;
         in >> r >> g >> b;
-        pix = Pixel((int)r,(int)g,(int)b);
+        pix = Pixel(static_cast<int>(r),static_cast<int>(g),static_cast<int>(b));
       }
     }
   }

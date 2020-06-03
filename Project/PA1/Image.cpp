@@ -152,10 +152,8 @@ void Collage::resizeLayer(Image& im, int trgH, int trgW) {
       pixelsNew.at(i).at(j) = pixelsOld.at((int)(i * relHeight)).at((int)(j * relWidth));
     }
   }
-  //ofstream outStream("testingNewImg.ppm");
   im.setDimensions(trgH, trgW);
   im.setPixels(pixelsNew);
-  //newImage.writeImage(outStream);
   return;
 }
 

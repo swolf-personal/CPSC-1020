@@ -62,7 +62,7 @@ class Image
 {
   private:
     Header hdr;
-    vector<vector<Pixel> > pixels;
+    vector<vector<Pixel>> pixels;
 
   public:
     Image();
@@ -84,23 +84,32 @@ class Image
 
 class Collage{
   private:
-    //Header hdr;
+    //Output stage object
     Image image;
+    //Layered images in work
     vector<Image> layers;
 
   public:
+    //Allows collage to be default constructed
     Collage();
-
+    //Saves space in driver by handling input
+    Collage(string);
     //Required call before printing. Consolidates layers
     //Similar idea as most digital editors
+    //Param: None | Return: Void
     void flatten();
     //Writes pixels to file? Unsure of use w/ printP# funcs
+    //Param: ofstream& | Return: Void
     void writeImage(ofstream&);
     //Used to resize a layer for the collage object
+    //Param: Image&, int height, int width
+    //Return: Void
     void resizeLayer(Image&, int, int);
     //Uses member funcs to achieve the project goal
+    //Param: None | Return: Void
     void createCollage();
-    //Read
+    //Reads imqage from file into output stage
+    //Param: ifstream& | Return: Void
     void readImage(ifstream&);
 };
 

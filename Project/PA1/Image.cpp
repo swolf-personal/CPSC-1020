@@ -138,6 +138,13 @@ void Image::writeImage(ofstream& out) {
 
 Collage::Collage() {}
 
+Collage::Collage(string inName) {
+  ifstream in(inName);
+
+  readImage(in);
+
+  in.close();
+}
 
 void Collage::readImage(ifstream& in) {
   image.readHeader(in);

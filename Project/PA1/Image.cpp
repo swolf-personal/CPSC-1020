@@ -32,7 +32,7 @@ int Header::getMaxVal() {return maxVal;}
 
 Pixel::Pixel() {}
 
-Pixel::Pixel(int rIn, int gIn, int bIn) : r(rIn), b(bIn), g(gIn) {}
+Pixel::Pixel(int rIn, int gIn, int bIn) : r(rIn), g(gIn), b(bIn) {}
 
 int Pixel::getR() {return r;}
 int Pixel::getG() {return g;}
@@ -125,7 +125,7 @@ void Collage::flatten() {
   for(Image& layer : layers){
     for (int i = 0; i < layer.getHeader().getHeight(); i++) {
       for (int j = 0; j < layer.getHeader().getWidth(); j++) {
-        image.getPixel(i,j) = layer.getPixel(i,j);
+        image.getPixel(i+200,j+150) = layer.getPixel(i,j);
       }
     }
   }
@@ -137,7 +137,6 @@ void Collage::resizeLayer(Image& im, int trgH, int trgW) {
   Image newImage;
   newImage.setDimensions(trgH, trgW);
   double relHeight = (double)im.getHeader().getHeight() / trgH;
-  //cout << "Height: " << im.getHeader().getHeight() << " Width " << im.getHeader().getWidth() << endl;
   double relWidth = (double)im.getHeader().getWidth() / trgW;
 
   //im.setDimensions(trgH, trgW);
@@ -150,8 +149,7 @@ void Collage::resizeLayer(Image& im, int trgH, int trgW) {
     {
       //im.getPixel takes the h and w locations and returns a pixel reference
       //newImage.getPixel(i,j) = im.getPixel((int)(i*relHeight), (int)(j*relWidth));
-      pixelsNew.at(i).at(j) = pixelsOld.at((int)(i * relHeight)).at((int)(j * relWidth)); 
-        
+      pixelsNew.at(i).at(j) = pixelsOld.at((int)(i * relHeight)).at((int)(j * relWidth));
     }
   }
   //ofstream outStream("testingNewImg.ppm");
@@ -162,14 +160,6 @@ void Collage::resizeLayer(Image& im, int trgH, int trgW) {
 }
 
 void Collage::createCollage() {
-  /*
-  for (int i = 0; i < 3; i++)
-  {
-    Image duplicateImage = image;
-    if(i != 0)
-      resizeLayer(duplicateImage, 600/i, 800/i);
-    layers.push_back(duplicateImage);
-  } */
   Image im1 = image;
   resizeLayer(im1, 300, 400);
   layers.push_back(im1);
@@ -179,8 +169,6 @@ void Collage::createCollage() {
   layers.push_back(im2);
 
   flatten();
-  
-  //resizeLayer(image, 300, 400);
 }
 
 //END COLLAGE

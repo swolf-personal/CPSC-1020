@@ -20,11 +20,12 @@ using namespace std;
 int main(int argc, char const *argv[]) {
   ifstream inStream("testP3.ppm");
   ofstream outFile("outP3.ppm");
-  Collage newCollage;
-
-  newCollage.readImage(inStream);
-  newCollage.createCollage();
-  newCollage.writeImage(outFile);
+  Collage p3Collage;
+  p3Collage.readImage(inStream);
+  p3Collage.createCollage();
+  p3Collage.writeImage(outFile);
+  inStream.close();
+  outFile.close();
 
   return 0;
 }

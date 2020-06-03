@@ -18,8 +18,8 @@ wolf7@clemson.edu
 using namespace std;
 
 int main(int argc, char const *argv[]) {
-  ifstream inStream("copyP3.ppm");
-  ofstream outFile("plsWork.ppm");
+  ifstream inStream("testP3.ppm");
+  ofstream outFile("outP3.ppm");
   Collage newCollage;
 
   newCollage.readImage(inStream);

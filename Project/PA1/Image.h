@@ -18,7 +18,7 @@ wolf7@clemson.edu
 
 using namespace std;
 
-class Header {
+class Header { //TODO document set/get
   private:
     string magicChar;
     int width;
@@ -96,7 +96,7 @@ class Image
     void writeImage(ofstream&);
 };
 
-class Collage{
+class Collage{ //TODO move to seperate files
   private:
     //Output stage object
     Image image;

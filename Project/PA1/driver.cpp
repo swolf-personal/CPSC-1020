@@ -18,7 +18,7 @@ wolf7@clemson.edu
 using namespace std;
 
 int main(int argc, char const *argv[]) {
-  ifstream inCaseOne("testP3.ppm");
+  ifstream inCaseOne("testP3.ppm"); //TODO change to argv
   ofstream outCaseOne("outP3.ppm");
   
   Collage testCaseOne(inCaseOne);
@@ -28,7 +28,7 @@ int main(int argc, char const *argv[]) {
   inCaseOne.close();
   outCaseOne.close();
 
-  ifstream inCaseTwo("testP6.ppm");
+  ifstream inCaseTwo("testP6.ppm"); //TODO change to argv
   ofstream outCaseTwo("outP6.ppm");
 
   Collage testCaseTwo(inCaseTwo);

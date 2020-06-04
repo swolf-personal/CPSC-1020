@@ -1,0 +1,37 @@
+DUE ON 5/22
+
+Sometimes even the smallest change in data can make a big difference. 
+Luckily, there are algorithms that will let us not only detect when there has been an error(like checksums), 
+but also correct when an error has occurred. These algorithms are called error-correcting codes.
+There are many examples of error correcting codes but one of the simplest examples is called a parity bit. 
+A parity bit is just a single bit (1 or 0) that indicates whether a set of values has an even number of 1s (then the bit would be set to 0), 
+or an odd number of 1s (then the bit would be set to 1).
+If you have a row of 1s and 0s, you can detect whether a single bit has been changed by checking the parity bit. 
+But this won’t tell you anything about where the error is positioned.
+
+Consider the following array of bits:
+
+1 0 1 0 1 0 1 1
+
+The parity bit of this array would be 1, since there are an odd number of 1s. If a single bit changed, the parity bit would be 0 (since a 1 was either added or removed).If you have a grid of 1s and 0s, you can detect whether a single bit has been changed by checking the parity bit of each row and each column. If you find a row that’s been changed and a column that’s been changed, then you know that the bit that was changed was at the intersection of that row and column. If a single bit changed, then you would be able to find the wrong bit, based on the wrong parity bits.
+
+For this assignment you are going to calculate the parity for a 2D matirx of bits. As example:
+
+This is a 3 by 4 matirx.
+
+1 0 1 0    parity = 0 since there is an even number of 1's
+
+1 0 1 1    parity = 1 since there is an odd number of 1's
+
+1 1 1 1    parity = 0 since there is an even numnber of 1's
+
+----------
+
+1 1 1 0   is the parity of the above columns of rows
+
+ 
+
+Your program should output the following:
+
+Columns of Rows Parity: 1 1 1 0 
+Rows of Columns Parity: 0 1 0 

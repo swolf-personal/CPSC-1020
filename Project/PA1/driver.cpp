@@ -19,7 +19,7 @@ using namespace std;
 
 int main(int argc, char const *argv[]) {
   ifstream inCaseOne("testP3.ppm"); //TODO change to argv
-  ofstream outCaseOne("outP3.ppm");
+  ofstream outCaseOne("outP3.ppm"); //TODO Check that files open properly
   
   Collage testCaseOne(inCaseOne);
   testCaseOne.createCollage();

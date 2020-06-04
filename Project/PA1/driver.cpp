@@ -13,13 +13,17 @@ wolf7@clemson.edu
 #include <vector>
 #include <string>
 
-#include "Image.h"
+#include "src/collage.h"
 
 using namespace std;
 
 int main(int argc, char const *argv[]) {
-  ifstream inCaseOne("testP3.ppm"); //TODO change to argv
-  ofstream outCaseOne("outP3.ppm"); //TODO Check that files open properly
+  ifstream inCaseOne(argv[1]);
+  if(!inCaseOne) {
+    cout << "Failed to open first test file!" << endl;
+    return -1;
+  }
+  ofstream outCaseOne("outP3.ppm");
   
   Collage testCaseOne(inCaseOne);
   testCaseOne.createCollage();
@@ -28,7 +32,11 @@ int main(int argc, char const *argv[]) {
   inCaseOne.close();
   outCaseOne.close();
 
-  ifstream inCaseTwo("testP6.ppm"); //TODO change to argv
+  ifstream inCaseTwo(argv[2]);
+  if(!inCaseTwo) {
+    cout << "Failed to open second test file!" << endl;
+    return -1;
+  }
   ofstream outCaseTwo("outP6.ppm");
 
   Collage testCaseTwo(inCaseTwo);

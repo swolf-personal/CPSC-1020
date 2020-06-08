@@ -1,5 +1,15 @@
+/* -------------------- /
+Stephen Wolf
+wolf7
+Lab 8
+Section: 001
+Nushrat Humaira
+Alex Myers
+/ -------------------- */
+
 #ifndef HEADER_H
 #define HEADER_H
+
 #include <string>
 #include <fstream>
 #include <iostream>

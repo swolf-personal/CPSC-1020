@@ -1,3 +1,12 @@
+/* -------------------- /
+Stephen Wolf
+wolf7
+Lab 8
+Section: 001
+Nushrat Humaira
+Alex Myers
+/ -------------------- */
+
 #ifndef PIXEL_H
 #define PIXEL_H
 

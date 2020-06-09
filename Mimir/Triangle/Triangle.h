@@ -35,6 +35,8 @@ class Triangle
         *implement the copy constructor.  */
         Triangle(const Triangle&);
 
+        ~Triangle();
+
         /*Parameter: Point reference. 
         *This functions should determine if a definded point is within the dimensions 
         *of a triangle. To do this you can use Barycentric Coordinate System to 

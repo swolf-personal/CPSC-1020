@@ -10,13 +10,47 @@ using namespace std;
  *and calls setPoint. */
 Triangle::Triangle(ifstream& in)
 {
+  tri = new Point[3];
   
+  double x1 = 0, y1 = 0;
+  in >> x1 >> y1;
+  Point p1(x1,y1);
+
+  double x2 = 0, y2 = 0;
+  in >> x2 >> y2;
+  Point p2(x2,y2);
+
+  double x3 = 0, y3 = 0;
+  in >> x3 >> y3;
+  Point p3(x3,y3);
+
+  tri[0] = p1;
+  tri[1] = p2;
+  tri[2] = p3;
 }
 /*This is a default constructor.  You should allocate memory for three points
  *then for each point call setPoint and set the values to a default value.*/
 Triangle::Triangle()
 {
-   
+  tri = new Point[3];
+  
+  double x1 = 0, y1 = 0;
+  Point p1(x1,y1);
+
+  double x2 = 0, y2 = 0;
+  Point p2(x2,y2);
+
+  double x3 = 0, y3 = 0;
+  Point p3(x3,y3);
+
+  tri[0] = p1;
+  tri[1] = p2;
+  tri[2] = p3;
+}
+
+Triangle::~Triangle()
+{
+  delete [] tri;
 }
 
 /*Parameter: Point* p - this represents three points that defines a triangle.
@@ -25,21 +59,32 @@ Triangle::Triangle()
  *set tri's values to the values stored in what p is pointing to.  */
 Triangle::Triangle(Point * p)
 {
-  
+  tri = new Point[3];
+
+  tri[0] = p[0];
+  tri[1] = p[1];
+  tri[2] = p[2];
 }
 /*This is a copy constructor.
  *Parameter: The parameter is of type Triangle& See the notes on how to 
  *implement the copy constructor.  */
 Triangle::Triangle(const Triangle& obj)
 {
-  
+  delete [] this->tri;
+  this->tri = new Point[3];
+
+  this->tri[0] = obj.tri[0];
+  this->tri[1] = obj.tri[1];
+  this->tri[2] = obj.tri[2];
 }
 
 /*Parameter: Point* p
  *this function sets (tri) to the points stored in p. */
 void Triangle::setTriangle(Point *p)
 {
-    
+  tri[0] = p[0];
+  tri[1] = p[1];
+  tri[2] = p[2];
 }
 
 /*Parameter: Point reference. 
@@ -67,7 +112,18 @@ void Triangle::setTriangle(Point *p)
 
 bool Triangle::isHit(Point& test)
 {
-  
-  
+  double a = ((tri[1].getY() - tri[2].getY()) * (test.getX() - tri[2].getX()) 
+  + (tri[2].getX() - tri[1].getX()) * (test.getY() - tri[2].getY())) 
+  / ((tri[1].getY() - tri[2].getY()) * (tri[0].getX() - tri[2].getX()) 
+  + (tri[2].getX() - tri[1].getX()) * (tri[0].getY() - tri[2].getY()));
+  double b = ((tri[2].getY() - tri[0].getY()) * (test.getX() - tri[2].getX()) 
+  + (tri[0].getX() - tri[2].getX()) * (test.getY() - tri[2].getY())) 
+  / ((tri[1].getY() - tri[2].getY()) * (tri[0].getX() - tri[2].getX()) 
+  + (tri[2].getX() - tri[1].getX()) * (tri[0].getY() - tri[2].getY()));
+  double c = 1 - a - b;
 
+  if(a>=0 && a<=1 && b>=0 && b<=1 && c>=0 && c<=1)
+    return true;
+
+  return false;
 }

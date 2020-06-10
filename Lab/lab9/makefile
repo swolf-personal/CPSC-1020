@@ -44,16 +44,20 @@ bin/%.o: src/%.cpp $(HDRS)
 	@mkdir -p $(dir $@)
 	$(CC) $(CFLAGS) -c $< -o $@
 
+#Start the program with the flags after compile
+run: build
+	./$(TARGET) $(CARGS)
+
 #Display all found files
 which:
 	@echo "FOUND SOURCES: ${C_SRCS}"
 	@echo "FOUND HEADERS: ${HDRS}"
 
-#Start the program with the flags after compile
-run: build
-	./$(TARGET) $(CARGS)
-
 #Remove the executable and binaries
 clean:
 	rm -f $(TARGET)
 	rm -rf bin
+
+#Archive the directory TODO - don't tar a tar
+tar: 
+	tar -czvf wolf7_$(PROJECT).tar.gz *

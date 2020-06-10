@@ -1,0 +1,31 @@
+/* -------------------- /
+Stephen Wolf
+wolf7
+Lab 9
+Section: 001
+Nushrat Humaira
+Alex Myers
+/ -------------------- */
+
+#include "point.h"
+#include "shape.h"
+
+#include "circle.h"
+
+using namespace std;
+
+int Circle::count = 1;
+
+Circle::Circle(Point pt, int r = 1) 
+: Shape(count, "Circle"), center(pt), radius(r) {cout++;}
+
+virtual bool isHit(const Point& pt) {
+    double loc = 
+    sqrt(((pt.getX() - centerPt.getX())*(pt.getX() - centerPt.getX())) 
+    + ((pt.getY() - centerPt.getY())*(pt.getY() - centerPt.getY())));
+
+    if (loc < radius)
+        return true;
+    else
+        return false;
+}

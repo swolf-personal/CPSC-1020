@@ -16,8 +16,15 @@ using namespace std;
 
 int Circle::count = 1;
 
+Circle::Circle(ifstream& in) : Shape("Circle", count) {
+    in >> radius;
+    double x = 0, y = 0;
+    in >> x >> y;
+    center.setPoint(x,y);
+}
+
 Circle::Circle(Point pt, int r = 1) 
-: Shape(count, "Circle"), center(pt), radius(r) {cout++;}
+: Shape("Circle", count), center(pt), radius(r) {cout++;}
 
 virtual bool isHit(const Point& pt) {
     double loc = 
@@ -26,6 +33,5 @@ virtual bool isHit(const Point& pt) {
 
     if (loc < radius)
         return true;
-    else
-        return false;
+    return false;
 }

@@ -19,7 +19,7 @@ double Point::getX() const {return x;}
 
 double Point::getY() const {return y;}
 
-void Point::setPointP(double x, double y) {
+void Point::setPoint(double x, double y) {
     this->x = x;
     this->y = y;
 }

@@ -23,7 +23,7 @@ class Shape{
         string name;
         int id;
 
-        Shape();
+        Shape(string, int);
         ~Shape();
 
         virtual bool isHit(const Point&) = 0;

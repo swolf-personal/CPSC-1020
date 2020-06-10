@@ -22,8 +22,8 @@ class Point
     public:
         /*The next two functions are constructors.  They are simple constructors
          *and need no explanation. the first parameter is x, second is y */
-        Point(double, double);
         Point();
+        Point(double, double);
         /*This setter is used by the other classes. It simply sets the value of
          *both x and y values. */
         void setPoint(double, double);

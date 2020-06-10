@@ -23,8 +23,11 @@ class Circle : public Shape {
         int radius;
         Point center;
 
+        Circle(ifstream&);
         Circle(Point, int);
         ~Circle();
 
         virtual bool isHit(const Point&);
 };
+
+#endif

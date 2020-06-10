@@ -22,8 +22,9 @@ class Triangle : public Shape {
         static int count;
         vector<Point> verts;
 
-        Circle(Point, Point, Point);
-        ~Circle();
+        Triangle(ifstream& in);
+        Triangle(Point, Point, Point);
+        ~Triangle(); // TODO - Not needed, no heap memory
 
         virtual bool isHit(const Point&);
 };

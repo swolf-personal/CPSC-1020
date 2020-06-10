@@ -21,19 +21,21 @@ using namespace std;
 class Point
 {
     private:
+        //Points have an x and y cord
         double x, y;
 
     public:
-        /*The next two functions are constructors.  They are simple constructors
-         *and need no explanation. the first parameter is x, second is y */
+        //A default point at the origin
         Point();
+        //Manually define the point at creation
         Point(double, double);
-        /*This setter is used by the other classes. It simply sets the value of
-         *both x and y values. */
+
+        //Set both cords of the point
         void setPoint(double, double);
-        /*The next 2 functions are simple getters. Their job is to simply return
-         *the value of x and y, respectivly. */
+
+        //Return the x cord
         double getX() const;
+        //Return the y cord
         double getY() const;
 };
 #endif

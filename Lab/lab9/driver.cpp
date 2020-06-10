@@ -24,9 +24,11 @@ Alex Myers
 using namespace std;
 
 int main(int argc, char const *argv[]) {
+    //Objects
     vector<Point> points;
     vector<Shape*> shapes;
 
+    //Input files
     ifstream shapesIn(argv[1]);
     if(!shapesIn){
         cout << "Shapes file failed to open!" << endl;
@@ -38,31 +40,49 @@ int main(int argc, char const *argv[]) {
         return -1;
     }
 
+    //Read in shapes
     string shapeType = "";
     while (shapesIn >> shapeType) {
         if (shapeType == "Circle") {
-            Circle newCircle(shapesIn);
-            shapes.push_back(&newCircle);
+            shapes.push_back(new Circle(shapesIn));
         } else if (shapeType == "Triangle") {
-            Triangle newTriangle(shapesIn);
-            shapes.push_back(&newTriangle);
+            shapes.push_back(new Triangle(shapesIn));
         } else {
             cout << "Invalid shape type encountered!" << endl;
             return -1;
         }
     }
+    //Read in points
     double x = 0, y = 0;
     while(ptsIn >> x >> y) {
         points.push_back(Point(x,y));
     }
+    shapesIn.close();
+    ptsIn.close();
 
+    //Determine point intersections
+    int counter = 0;
     for (auto& pt : points) {
-        for (int i = 0; i < shapes.size(); i++) {
-            if(shapes[i]->isHit(pt)) {
-                shapes[i]->printName(cout);
-                cout << " hit by point at x: " << pt.getX() << " y: " << pt.getY() << endl;
+        bool anyHits = false;
+        cout << "Point: " << counter 
+        << " (" << pt.getX() << "," << pt.getY() << "):" << endl;
+        counter++;
+        for(Shape* shape : shapes) {
+            if(shape->isHit(pt)) {
+                cout << "\t";
+                shape->printName(cout);
+                cout << " #" << shape->getID() << endl;
+                anyHits = true;
             }
         }
+        if(!anyHits) {
+            cout << "\tNO HITS" << endl;
+        }
+    }
+
+    //Free memory used in shape array
+    for(Shape* shape : shapes) {
+        delete shape;
     }
 
     return 0;

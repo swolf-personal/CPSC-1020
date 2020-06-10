@@ -23,15 +23,20 @@ using namespace std;
 
 class Circle : public Shape {
     private:
+        //The amount of circle that have been brought into this world
         static int count;
+        //The center point
         Point center;
-        int radius;
+        //Radius of the circle
+        double radius;
         
     public:
+        //Make a circle from a formatted text input
         Circle(ifstream&);
+        //Make a circle by manually definiing its members
         Circle(Point, int);
-        ~Circle();
 
+        //Determine if a point is within the circle
         bool isHit(const Point&);
 };
 

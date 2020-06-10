@@ -18,10 +18,8 @@ using namespace std;
 Shape::Shape(string nameIn = "Shape", int idIn = 0) 
 : name(nameIn), id(idIn) {}
 
-Shape::~Shape() {
+Shape::~Shape() {}
 
-}
+void Shape::printName(ostream& out) {out << name;}
 
-void Shape::printName(ostream& out) {
-    out << name;
-}
+int Shape::getID() {return id;}

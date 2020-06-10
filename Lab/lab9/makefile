@@ -8,6 +8,8 @@ LFLAGS=-lm
 CARGS=input/shapes.txt input/points.txt
 #Driver name
 TARGET=driver
+#Name of the assignment
+PROJECT=lab9
 
 
 #Dynamically find all source files, even in nested dirs

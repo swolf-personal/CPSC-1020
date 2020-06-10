@@ -10,23 +10,26 @@ Alex Myers
 #ifndef TRIANGLE_H
 #define TRIANGLE_H
 
+#include <math.h>
 #include <iostream>
+#include <fstream>
 #include <vector>
+#include <string>
 
 #include "shape.h"
 
 using namespace std;
 
 class Triangle : public Shape {
-    protected:
+    private:
         static int count;
         vector<Point> verts;
-
+    public:
         Triangle(ifstream& in);
         Triangle(Point, Point, Point);
         ~Triangle(); // TODO - Not needed, no heap memory
 
-        virtual bool isHit(const Point&);
+        bool isHit(const Point&);
 };
 
 #endif

@@ -49,6 +49,8 @@
         "array": "cpp",
         "deque": "cpp",
         "string_view": "cpp",
-        "unordered_map": "cpp"
+        "unordered_map": "cpp",
+        "__functional_base": "cpp",
+        "locale": "cpp"
     }
 }

@@ -5,7 +5,7 @@ CFLAGS=-Wall -g -std=c++11
 #Linker flags
 LFLAGS=-lm
 #Program args
-CARGS=circleTest.txt
+CARGS=input/shapes.txt input/points.txt
 #Driver name
 TARGET=driver
 

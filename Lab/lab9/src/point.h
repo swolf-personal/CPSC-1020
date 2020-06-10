@@ -10,7 +10,11 @@ Alex Myers
 #ifndef POINT_H
 #define POINT_H
 
+#include <math.h>
 #include <iostream>
+#include <fstream>
+#include <vector>
+#include <string>
 
 using namespace std;
 

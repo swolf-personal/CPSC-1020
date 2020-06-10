@@ -10,23 +10,23 @@ Alex Myers
 #include "point.h"
 #include "shape.h"
 
-#include "circle.h"
+#include "triangle.h"
 
 using namespace std;
 
 int Triangle::count = 1;
 
-Triangle(ifstream& in) : Shape("Triangle", count) {
+Triangle::Triangle(ifstream& in) : Shape("Triangle", count) {
 
 }
-Triangle(Point, Point, Point) : Shape("Triangle", count) {
+Triangle::Triangle(Point, Point, Point) : Shape("Triangle", count) {
 
 }
-~Triangle() {
+Triangle::~Triangle() {
 
 }
 
-virtual bool isHit(const Point& pt) {
+bool Triangle::isHit(const Point& pt) {
     double a = 
     ((verts[1].getY() - verts[2].getY()) 
     * (pt.getX() - verts[2].getX())
@@ -49,7 +49,7 @@ virtual bool isHit(const Point& pt) {
     
     double c = 1 - a - b;
 
-    if(a>=0 && a<=1 && b>=0 && b<=1 && c>=0 && c<=1)
+    if (a>=0 && a<=1 && b>=0 && b<=1 && c>=0 && c<=1)
         return true;
     return false;
 }

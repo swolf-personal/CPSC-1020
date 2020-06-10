@@ -21,15 +21,19 @@ Circle::Circle(ifstream& in) : Shape("Circle", count) {
     double x = 0, y = 0;
     in >> x >> y;
     center.setPoint(x,y);
+    count++;
 }
 
 Circle::Circle(Point pt, int r = 1) 
-: Shape("Circle", count), center(pt), radius(r) {cout++;}
+: Shape("Circle", count), center(pt), radius(r) {count++;}
 
-virtual bool isHit(const Point& pt) {
+Circle::~Circle() {}
+
+bool Circle::isHit(const Point& pt) {
+    cout << "Circle is hit" << endl;
     double loc = 
-    sqrt(((pt.getX() - centerPt.getX())*(pt.getX() - centerPt.getX())) 
-    + ((pt.getY() - centerPt.getY())*(pt.getY() - centerPt.getY())));
+    sqrt(((pt.getX() - center.getX())*(pt.getX() - center.getX())) 
+    + ((pt.getY() - center.getY())*(pt.getY() - center.getY())));
 
     if (loc < radius)
         return true;

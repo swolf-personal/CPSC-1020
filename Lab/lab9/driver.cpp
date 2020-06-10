@@ -61,7 +61,7 @@ int main(int argc, char const *argv[]) {
     ptsIn.close();
 
     //Determine point intersections
-    int counter = 0;
+    int counter = 1;
     for (auto& pt : points) {
         bool anyHits = false;
         cout << "Point: " << counter 

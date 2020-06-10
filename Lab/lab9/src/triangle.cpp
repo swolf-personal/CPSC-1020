@@ -36,14 +36,8 @@ Triangle::Triangle(ifstream& in) : Shape("Triangle", count) {
 
     count++;
 }
-Triangle::Triangle(Point, Point, Point) : Shape("Triangle", count) {
-    count++;
-}
-/*
-Triangle::~Triangle() {
+Triangle::Triangle(Point, Point, Point) : Shape("Triangle", count) {count++;}
 
-}
-*/
 bool Triangle::isHit(const Point& pt) {
     double a = 
     ((verts[1].getY() - verts[2].getY()) 

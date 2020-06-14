@@ -7,6 +7,7 @@ Nushrat Humaira
 Alex Myers
 / -------------------- */
 
+#include <string>
 #include "MyString.h"
 
 using namespace std;
@@ -17,26 +18,27 @@ using namespace std;
 */
 
 // Default constructor
-MyString::MyString () : size(0), data(new char[1]) {
+MyString::MyString () : data(new char[1]), size(0) {
   data[0] = '\0';
 }
 // Copy from cstring
-MyString::MyString (const char* s) {
-  delete [] data;
-  size = strlen(s);
-  data = new char[size+1];
+MyString::MyString (const char* s) : data(new char[strlen(s)]), size(strlen(s)) {
+  //delete [] data;
+  //size = strlen(s);
+  //data = new char[size];
   memcpy(data, s, size);
   data[size] = '\0';
 }
 // Copy form MyString
-MyString::MyString (const MyString& mys) {
-  delete [] data;
-  size = mys.size;
-  data = new char[size+1];
+MyString::MyString (const MyString& mys) : data(new char[mys.size]), size(mys.size)  {
+  //delete [] data;
+  //size = mys.size;
+  //data = new char[size];
+  memcpy(data, mys.data, size);
   data[size] = '\0';
-  for(int i = 0; i <= size; i++) {
-    data[i] = mys[i];
-  }
+  //for(int i = 0; i <= size; i++) {
+  //  data[i] = mys[i];
+  //}
 }
 
 // Destructor will actuall need code...
@@ -52,17 +54,19 @@ int MyString::len () const {return size;}
 MyString& MyString::operator= (const MyString& mys) {
   delete [] data;
   size = mys.size;
-  data = new char[size+1];
+  data = new char[size];
+  memcpy(data, mys.data, size);
   data[size] = '\0';
-  for(int i = 0; i <= size; i++) {
-    data[i] = mys[i];
-  }
+
   return *this;
 }
 MyString& MyString::operator= (const char* s) {
+  //TODO - Avoid self assignment
+  
   delete [] data;
+  
   size = strlen(s);
-  data = new char[size+1];
+  data = new char[size];
   memcpy(data, s, size);
   data[size] = '\0';
   return *this;
@@ -71,17 +75,19 @@ MyString& MyString::operator+= (const MyString& mys) {
   int oSize = size;
   char* oData = new char[size];
   memcpy(oData, data, size);
+  
   delete [] data;
-  size = size+mys.size-1;
-  char* data = new char[size+mys.size-1];
+  size = size+mys.size;
+  data = new char[size+mys.size];
 
   //Repopulate the original data
-  for(int i = 0; i < oSize; i++) {
-    data[i] = oData[i];
-  }
+  memcpy(data, oData, oSize);
+  //for(int i = 0; i < oSize; i++) {
+  //  data[i] = oData[i];
+  //}
   //Append the new data
-  for(int i = oSize; i < size; i++) {
-    data[i] = mys[i];
+  for(int i = 0; i < mys.size; i++) {
+    data[i+oSize] = mys[i];
   }
   data[size] = '\0';
 
@@ -110,7 +116,7 @@ bool MyString::operator==(const MyString& right) const {
     dSame = false;
   } else {
     for(int i = 0; i < size; i++) {
-      if(this[i] != right[i]) {
+      if(data[i] != right[i]) {
         dSame = false;
         break;
       }
@@ -126,7 +132,7 @@ bool MyString::operator!=(const MyString& right)const {
     dSame = false;
   } else {
     for(int i = 0; i < size; i++) {
-      if(this[i] != right[i]) {
+      if(data[i] != right[i]) {
         dSame = false;
         break;
       }
@@ -136,39 +142,79 @@ bool MyString::operator!=(const MyString& right)const {
 }
 
 bool operator< (const MyString& left, const MyString& right) {
+  if (left.size == right.size) {
+    for(int i = 0; i < left.size; i++) {
+      if(left[i] < right[i]) {
+        return true;
+      }
+    }
+  } else if(left.size < right.size) {
+    return true;
+  }
   return false;
 }
 bool operator> (const MyString& left, const MyString& right) {
+  if (left.size == right.size) {
+    for(int i = 0; i < left.size; i++) {
+      if(left[i] > right[i]) {
+        return true;
+      }
+    }
+  } else if(left.size > right.size) {
+    return true;
+  }
   return false;
 }
 bool operator<= (const MyString& left, const MyString& right) {
-  return false;
-}
-bool operator>= (const MyString& left, const MyString& right) {
+  if (left.size == right.size) {
+    for(int i = 0; i < left.size; i++) {
+      if(left[i] <= right[i]) {
+        return true;
+      }
+    }
+  } else if(left.size <= right.size) {
+    return true;
+  }
   return false;
 }
 
-// Member function, array indexing
-// Check your bounds, and make it const!
+bool operator>= (const MyString& left, const MyString& right) {
+  if (left.size == right.size) {
+    for(int i = 0; i < left.size; i++) {
+      if(left[i] >= right[i]) {
+        return true;
+      }
+    }
+  } else if(left.size >= right.size) {
+    return true;
+  }
+  return false;
+}
+
 char MyString::operator[] (int ndx) const {
   if (ndx > size || ndx < 0) {
     throw std::out_of_range("MyString index out of range!");
   }
   return data[ndx];
 }
-// return substring beginning at index and length sublength
+
 MyString MyString::operator()(int begin, int end) const {
   MyString subString;
+  char* subChars = new char[(end-begin)+1];
   for (int i = begin; i < end; i++) {
-    subString += this[i];
+    subChars[i] = this->data[i];
   }
-  return subString;
+  return MyString(subChars);
 }
-// Output to a stream, another friendly kinda guy
-// Notice the parameters...
-ostream& operator<<(ostream& out, const MyString& mys) {
 
+ostream& operator<<(ostream& out, const MyString& mys) {
+  out << mys.data;
+  return out;
 }
 istream& operator>>(istream& in, MyString& mys) {
-
+  char* tmp = new char[256];
+  in >> tmp;
+  MyString myData(tmp);
+  mys += myData;
+  return in;
 }

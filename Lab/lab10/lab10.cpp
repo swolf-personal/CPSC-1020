@@ -1,3 +1,12 @@
+/* -------------------- /
+Stephen Wolf
+wolf7
+Lab 10
+Section: 001
+Nushrat Humaira
+Alex Myers
+/ -------------------- */
+
 #include <iostream>
 #include "MyString.h"
 

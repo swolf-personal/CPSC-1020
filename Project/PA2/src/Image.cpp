@@ -1,4 +1,13 @@
+/*************************
+ *Stephen Wolf
+ *CPSC 1020-001, Sp18
+ *wolf7@clemson.edu
+ *************************/
+
 #include "Image.h"
+
+using namespace std;
+
 /*This is an example of what I told you about when we were talking about static
  *functions being made static so they could be called in initialization list
  *without an instance of the class. */

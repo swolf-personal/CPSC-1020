@@ -1,3 +1,12 @@
+/*************************
+ *Stephen Wolf
+ *CPSC 1020-001, Sp18
+ *wolf7@clemson.edu
+ *************************/
+
+#include "SepiaFilter.h"
+
+using namespace std;
 
 /*The next two functions are constructors.  They are basically the same as
 the othr PixelFilters so I am not going to go over these. */
@@ -5,7 +14,7 @@ SepiaFilter::SepiaFilter () {
 
 }
 
-SepiaFilter::SepiaFilter (const SepiaFilter& spf) :{
+SepiaFilter::SepiaFilter (const SepiaFilter& spf) {//:{
 
 }
 

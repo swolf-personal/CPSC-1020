@@ -1,3 +1,12 @@
+/*************************
+ *Stephen Wolf
+ *CPSC 1020-001, Sp18
+ *wolf7@clemson.edu
+ *************************/
+
+#include "Header.h"
+
+using namespace std;
 
 Header::Header () :
   MAGIC(""), W(0), H(0), MC(0) {}

@@ -1,3 +1,12 @@
+/*************************
+ *Stephen Wolf
+ *CPSC 1020-001, Sp18
+ *wolf7@clemson.edu
+ *************************/
+
+#include "VFlipFilter.h"
+
+using namespace std;
 
 /*Default constructor that calls the base class constructor passing in a string
  *that represents the type of image filter*/

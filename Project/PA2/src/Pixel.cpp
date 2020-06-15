@@ -1,4 +1,12 @@
+/*************************
+ *Stephen Wolf
+ *CPSC 1020-001, Sp18
+ *wolf7@clemson.edu
+ *************************/
+
 #include "Pixel.h"
+
+using namespace std;
 
 Pixel::Pixel () : R(0), G(0), B(0) {}
 Pixel::Pixel (const Pixel& P) : R(P.R), G(P.G), B(P.B) {}

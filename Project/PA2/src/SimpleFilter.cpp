@@ -1,3 +1,12 @@
+/*************************
+ *Stephen Wolf
+ *CPSC 1020-001, Sp18
+ *wolf7@clemson.edu
+ *************************/
+
+#include "SimpleFilter.h"
+
+using namespace std;
 
 /*Filter is the base class here so call the Filter regular constructor. */
 SimpleFilter::SimpleFilter () {

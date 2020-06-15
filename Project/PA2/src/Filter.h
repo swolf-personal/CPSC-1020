@@ -1,3 +1,16 @@
+/*************************
+ *Stephen Wolf
+ *CPSC 1020-001, Sp18
+ *wolf7@clemson.edu
+ *************************/
+
+#include "Image.h"
+#include <string>
+#include <fstream>
+#include <vector>
+
+using namespace std;
+
 class Filter {
   protected:
     // Data - Shows that abstract classes can still do things

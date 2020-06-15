@@ -1,3 +1,12 @@
+/*************************
+ *Stephen Wolf
+ *CPSC 1020-001, Sp18
+ *wolf7@clemson.edu
+ *************************/
+
+#include "BinaryFilter.h"
+
+using namespace std;
 
 /*Initialize the static variable here.  You can call the constructor 
  *for pixel to set the values of white and black.   */

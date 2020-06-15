@@ -1,3 +1,14 @@
+/*************************
+ *Stephen Wolf
+ *CPSC 1020-001, Sp18
+ *wolf7@clemson.edu
+ *************************/
+
+#include "Filter.h"
+
+using namespace std;
+
+
 /*Filter is the top tier base class.  It is also an abstract class
  *it has one data member which represents the name of the the child class
  *since this is the default constructor set the name to an empty string

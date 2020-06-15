@@ -1,3 +1,16 @@
+/*************************
+ *Stephen Wolf
+ *CPSC 1020-001, Sp18
+ *wolf7@clemson.edu
+ *************************/
+
+#include "Pixel.h"
+#include <string>
+#include <fstream>
+#include <vector>
+
+using namespace std;
+
 class Header {
 private:
     string MAGIC;

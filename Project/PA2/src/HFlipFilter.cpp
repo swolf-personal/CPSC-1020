@@ -1,3 +1,12 @@
+/*************************
+ *Stephen Wolf
+ *CPSC 1020-001, Sp18
+ *wolf7@clemson.edu
+ *************************/
+
+#include "HFlipFilter.h"
+
+using namespace std;
 
 /*These are almost identical to the Veritical Flip Filter.  I am not goint to 
  *explain these */

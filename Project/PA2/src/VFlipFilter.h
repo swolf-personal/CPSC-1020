@@ -1,4 +1,16 @@
+/*************************
+ *Stephen Wolf
+ *CPSC 1020-001, Sp18
+ *wolf7@clemson.edu
+ *************************/
 
+#include "Image.h"
+#include "SimpleFilter.h"
+#include <string>
+#include <fstream>
+#include <vector>
+
+using namespace std;
 
 class VFlipFilter : public SimpleFilter {
   public:

@@ -1,3 +1,17 @@
+/*************************
+ *Stephen Wolf
+ *CPSC 1020-001, Sp18
+ *wolf7@clemson.edu
+ *************************/
+
+#include "Image.h"
+#include "Filter.h"
+#include <string>
+#include <fstream>
+#include <vector>
+
+using namespace std;
+
 class SimpleFilter : public Filter {
   protected:
     // Derived classes need these visible

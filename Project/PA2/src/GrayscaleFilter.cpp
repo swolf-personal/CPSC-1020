@@ -1,3 +1,12 @@
+/*************************
+ *Stephen Wolf
+ *CPSC 1020-001, Sp18
+ *wolf7@clemson.edu
+ *************************/
+
+#include "GrayscaleFilter.h"
+
+using namespace std;
 
 /*This is the default constructor.  The GrayscalFilter class has no data member
  *so you only need to call the Base class constructor passing in the String

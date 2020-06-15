@@ -37,50 +37,74 @@ public:
   ******************/
 
   // Default constructor
+  //Param: None
   MyString ();
-  // Copy from cstring
+  //Copy from cstring
+  //Param: cstring
   MyString (const char*);
-  // Copy form MyString
+  //Copy form MyString
+  //Param: MyString
   MyString (const MyString&);
 
-  // Destructor will actuall need code...
+  //Destory data
   ~MyString ();
 
-  // Simple getter
+  //Simple getter
+  //Param: None | Return: length
   int len () const;
 
-  // Asignment, member functions
-  // Notice the return type!!!
+  //Assignment
+  //Param: MyString& | Return: MyString&
   MyString& operator= (const MyString&);
+  //Assignment
+  //Param: MyString& | Return: MyString&
   MyString& operator= (const char*);
+  //Assignment addition
+  //Param: MyString& | Return: MyString&
   MyString& operator+= (const MyString&);
 
-  // Friendly little guys, they ARE NOT member functions.
-  // Why? Look at the return type...
-  // HINT: Last 2 + operator can be done in a single line!
+  //Addition operator
+  //Param: MyString&, MyString& | Return: MyString
   friend MyString operator+ (const MyString&, const MyString&);
+  //Addition operator
+  //Param: MyString&, char* | Return: MyString
   friend MyString operator+ (const MyString&, const char*);
+  //Addition operator
+  //Param: char*, MyString& | Return: MyString
   friend MyString operator+ (const char*, const MyString&);
-  //relational operator
-  /*Returns true if the arrays are the same.  Otherwise it returns false.*/
+  
+  //Equal
+  //Param: MyString& | Return: bool
   bool operator==(const MyString&) const;
-
-  /*Returns true if the arrays are not equal, false otherwise.*/
+  //Not equal
+  //Param: MyString& | Return: bool
   bool operator!=(const MyString& right)const;
 
+  //Comparison operator
+  //Param: MyString&, MyString& | Return: bool
   friend bool operator< (const MyString& , const MyString&);
+  //Comparison operator
+  //Param: MyString&, MyString& | Return: bool
   friend bool operator> (const MyString& , const MyString&);
+  //Comparison operator
+  //Param: MyString&, MyString& | Return: bool
   friend bool operator<= (const MyString& , const MyString&);
+  //Comparison operator
+  //Param: MyString&, MyString& | Return: bool
   friend bool operator>= (const MyString& , const MyString&);
 
-  // Member function, array indexing
-  // Check your bounds, and make it const!
+  //Index operator, iterate through the char data
+  //Param: int | Return: char
   char operator[] (int ndx) const;
-// return substring beginning at index and length sublength
+  //Return a substring from a larger string
+  //Param: int, int | Return: MyString
   MyString operator()(int, int=0) const;
-  // Output to a stream, another friendly kinda guy
-  // Notice the parameters...
+
+  //Output to an ostream
+  //Param: ostream&, Mystream& | Return: ostream&
   friend ostream& operator<<(ostream&, const MyString&);
+  //Input from an istream
+  //Param: istream&, Mystream& | Return: istream&
   friend istream& operator>>(istream&, MyString&);
 };
 

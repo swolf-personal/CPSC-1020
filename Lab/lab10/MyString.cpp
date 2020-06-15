@@ -12,46 +12,34 @@ Alex Myers
 
 using namespace std;
 
-/* MyString Data reference
-  char* data;
-  int size;
-*/
-
-// Default constructor
+//Constructors
 MyString::MyString () : data(new char[1]), size(0) {
   data[0] = '\0';
 }
-// Copy from cstring
-MyString::MyString (const char* s) : data(new char[strlen(s)]), size(strlen(s)) {
-  //delete [] data;
-  //size = strlen(s);
-  //data = new char[size];
+
+MyString::MyString (const char* s) 
+: data(new char[strlen(s)]), size(strlen(s)) {
   memcpy(data, s, size);
   data[size] = '\0';
 }
-// Copy form MyString
-MyString::MyString (const MyString& mys) : data(new char[mys.size]), size(mys.size)  {
-  //delete [] data;
-  //size = mys.size;
-  //data = new char[size];
+
+MyString::MyString (const MyString& mys) 
+: data(new char[mys.size]), size(mys.size)  {
   memcpy(data, mys.data, size);
   data[size] = '\0';
-  //for(int i = 0; i <= size; i++) {
-  //  data[i] = mys[i];
-  //}
 }
 
-// Destructor will actuall need code...
+//Destructor
 MyString::~MyString () {
   delete [] data;
 }
 
-// Simple getter
+//Length getter
 int MyString::len () const {return size;}
 
-// Asignment, member functions
-// Notice the return type!!!
+//Equality operators
 MyString& MyString::operator= (const MyString& mys) {
+  if (&mys != this) {return *this;}
   delete [] data;
   size = mys.size;
   data = new char[size];
@@ -61,16 +49,15 @@ MyString& MyString::operator= (const MyString& mys) {
   return *this;
 }
 MyString& MyString::operator= (const char* s) {
-  //TODO - Avoid self assignment
-  
   delete [] data;
-  
   size = strlen(s);
   data = new char[size];
   memcpy(data, s, size);
   data[size] = '\0';
   return *this;
 }
+
+//Addition operators
 MyString& MyString::operator+= (const MyString& mys) {
   int oSize = size;
   char* oData = new char[size];
@@ -82,21 +69,15 @@ MyString& MyString::operator+= (const MyString& mys) {
 
   //Repopulate the original data
   memcpy(data, oData, oSize);
-  //for(int i = 0; i < oSize; i++) {
-  //  data[i] = oData[i];
-  //}
   //Append the new data
   for(int i = 0; i < mys.size; i++) {
     data[i+oSize] = mys[i];
   }
   data[size] = '\0';
+  delete [] oData;
 
   return *this;
 }
-
-// Friendly little guys, they ARE NOT member functions.
-// Why? Look at the return type...
-// HINT: Last 2 + operator can be done in a single line!
 MyString operator+ (const MyString& left, const MyString& right) {
   MyString addedString(left);
   addedString += right;
@@ -108,8 +89,8 @@ MyString operator+ (const MyString& left, const char* right) {
 MyString operator+ (const char* left, const MyString& right) {
   return MyString(left) + right;
 }
-//relational operator
-/*Returns true if the arrays are the same.  Otherwise it returns false.*/
+
+//Equality operators
 bool MyString::operator==(const MyString& right) const {
   bool dSame = true;
   if(size != right.size) {
@@ -124,8 +105,6 @@ bool MyString::operator==(const MyString& right) const {
   } 
   return dSame;
 }
-
-/*Returns true if the arrays are not equal, false otherwise.*/
 bool MyString::operator!=(const MyString& right)const {
   bool dSame = true;
   if(size != right.size) {
@@ -141,6 +120,7 @@ bool MyString::operator!=(const MyString& right)const {
   return !dSame;
 }
 
+//Comparison operators
 bool operator< (const MyString& left, const MyString& right) {
   if (left.size == right.size) {
     for(int i = 0; i < left.size; i++) {
@@ -177,7 +157,6 @@ bool operator<= (const MyString& left, const MyString& right) {
   }
   return false;
 }
-
 bool operator>= (const MyString& left, const MyString& right) {
   if (left.size == right.size) {
     for(int i = 0; i < left.size; i++) {
@@ -191,22 +170,25 @@ bool operator>= (const MyString& left, const MyString& right) {
   return false;
 }
 
+//Index operators
 char MyString::operator[] (int ndx) const {
   if (ndx > size || ndx < 0) {
     throw std::out_of_range("MyString index out of range!");
   }
   return data[ndx];
 }
-
 MyString MyString::operator()(int begin, int end) const {
-  MyString subString;
   char* subChars = new char[(end-begin)+1];
-  for (int i = begin; i < end; i++) {
+  for (int i = begin; i <= end; i++) {
     subChars[i] = this->data[i];
   }
-  return MyString(subChars);
+  subChars[(end-begin)+1] = '\0';
+  MyString subString(subChars);
+  delete [] subChars;
+  return subString;
 }
 
+//IO OPERATORS
 ostream& operator<<(ostream& out, const MyString& mys) {
   out << mys.data;
   return out;
@@ -214,7 +196,8 @@ ostream& operator<<(ostream& out, const MyString& mys) {
 istream& operator>>(istream& in, MyString& mys) {
   char* tmp = new char[256];
   in >> tmp;
-  MyString myData(tmp);
-  mys += myData;
+  //MyString myData(tmp);
+  mys = mys + tmp;
+  delete [] tmp;
   return in;
 }

@@ -13,18 +13,38 @@ wolf7@clemson.edu
 #include <vector>
 #include <string>
 
-#include "Image.h"
+#include "src/collage.h"
 
 using namespace std;
 
 int main(int argc, char const *argv[]) {
-  ifstream inStream("copyP3.ppm");
-  ofstream outFile("plsWork.ppm");
-  Collage newCollage;
+  ifstream inCaseOne(argv[1]);
+  if(!inCaseOne) {
+    cout << "Failed to open first test file!" << endl;
+    return -1;
+  }
+  ofstream outCaseOne("outP3.ppm");
+  
+  Collage testCaseOne(inCaseOne);
+  testCaseOne.createCollage();
+  testCaseOne.writeImage(outCaseOne);
+  
+  inCaseOne.close();
+  outCaseOne.close();
 
-  newCollage.readImage(inStream);
-  newCollage.createCollage();
-  newCollage.writeImage(outFile);
+  ifstream inCaseTwo(argv[2]);
+  if(!inCaseTwo) {
+    cout << "Failed to open second test file!" << endl;
+    return -1;
+  }
+  ofstream outCaseTwo("outP6.ppm");
+
+  Collage testCaseTwo(inCaseTwo);
+  testCaseTwo.createCollage();
+  testCaseTwo.writeImage(outCaseTwo);
+  
+  inCaseTwo.close();
+  outCaseTwo.close();
 
   return 0;
 }

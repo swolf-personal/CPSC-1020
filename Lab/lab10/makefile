@@ -8,6 +8,8 @@ LFLAGS=-lm
 CARGS=
 #Driver name
 TARGET=lab10
+#Project Name
+PROJECT=lab10
 
 
 #Dynamically find all source files, even in nested dirs

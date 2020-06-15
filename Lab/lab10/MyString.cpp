@@ -194,10 +194,9 @@ ostream& operator<<(ostream& out, const MyString& mys) {
   return out;
 }
 istream& operator>>(istream& in, MyString& mys) {
-  char* tmp = new char[256];
+  char* tmp = new char[50];
   in >> tmp;
-  //MyString myData(tmp);
-  mys = mys + tmp;
+  mys = tmp;
   delete [] tmp;
   return in;
 }

@@ -12,15 +12,15 @@ using namespace std;
  *classes. */
 /*These are the constructors Use initilaztion list for these*/
 
-PixelFilter::PixelFilter () {
+PixelFilter::PixelFilter () : Filter() {
 
 }
 
-PixelFilter::PixelFilter (string name) {
+PixelFilter::PixelFilter (string name) : Filter(name) {
 
   }
 
-PixelFilter::PixelFilter (const PixelFilter& pf) {
+PixelFilter::PixelFilter (const PixelFilter& pf) : Filter(pf) {
 
 }
 

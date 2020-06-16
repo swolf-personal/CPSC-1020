@@ -35,7 +35,7 @@ class Image {
     // Constructors
     Image (ifstream&);
     Image (const Image& i);
-    ~Image ();
+    //~Image ();
 
     // Write to file
     void write_header(ofstream&) const;

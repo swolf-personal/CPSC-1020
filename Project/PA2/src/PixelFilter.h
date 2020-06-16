@@ -4,6 +4,9 @@
  *wolf7@clemson.edu
  *************************/
 
+#ifndef PIXELFILTER_H
+#define PIXELFILTER_H
+
 #include "Image.h"
 #include "Filter.h"
 #include <string>
@@ -35,3 +38,4 @@ class PixelFilter : public Filter {
     friend ostream& operator<< (ostream&, const PixelFilter&);
 };
 
+#endif

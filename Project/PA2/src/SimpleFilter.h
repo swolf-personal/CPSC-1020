@@ -4,6 +4,9 @@
  *wolf7@clemson.edu
  *************************/
 
+#ifndef SIMPLEFILTER_H
+#define SIMPLEFILTER_H
+
 #include "Image.h"
 #include "Filter.h"
 #include <string>
@@ -34,4 +37,4 @@ class SimpleFilter : public Filter {
     friend ostream& operator<< (ostream&, const SimpleFilter&);
 };
 
-
+#endif

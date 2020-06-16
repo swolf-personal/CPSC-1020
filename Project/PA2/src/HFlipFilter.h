@@ -4,6 +4,9 @@
  *wolf7@clemson.edu
  *************************/
 
+#ifndef HFLIPFILTER_H
+#define FLIPFILTER_H
+
 #include "Image.h"
 #include "SimpleFilter.h"
 #include <string>
@@ -30,4 +33,4 @@ class HFlipFilter : public SimpleFilter {
     friend ostream& operator<< (ostream&, const HFlipFilter&);
 };
 
-
+#endif

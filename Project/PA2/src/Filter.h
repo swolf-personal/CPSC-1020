@@ -4,6 +4,9 @@
  *wolf7@clemson.edu
  *************************/
 
+#ifndef FILTER_H
+#define FILTER_H
+
 #include "Image.h"
 #include <string>
 #include <fstream>
@@ -41,4 +44,4 @@ class Filter {
     friend ostream& operator<< (ostream&, const Filter&);
 };
 
-
+#endif

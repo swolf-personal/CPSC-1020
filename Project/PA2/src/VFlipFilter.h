@@ -4,6 +4,9 @@
  *wolf7@clemson.edu
  *************************/
 
+#ifndef VFLIPFILTER_H
+#define VFLIPFILTER_H
+
 #include "Image.h"
 #include "SimpleFilter.h"
 #include <string>
@@ -30,4 +33,4 @@ class VFlipFilter : public SimpleFilter {
     friend ostream& operator<< (ostream&, const VFlipFilter&);
 };
 
-
+#endif

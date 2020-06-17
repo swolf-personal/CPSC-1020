@@ -9,19 +9,13 @@
 using namespace std;
 
 /*Filter is the base class here so call the Filter regular constructor. */
-SimpleFilter::SimpleFilter () : Filter() {
-
-}
+SimpleFilter::SimpleFilter () : Filter() {}
 
 /*Filter is the base class here so call the Filter regular constructor. */
-SimpleFilter::SimpleFilter (string name) : Filter(name) {
-
-}
+SimpleFilter::SimpleFilter (string name) : Filter(name) {}
 
 /*Filter is the base class here so call the Filter regular constructor. */
-SimpleFilter::SimpleFilter (const SimpleFilter& smpl) : Filter(smpl) {
-
-}
+SimpleFilter::SimpleFilter (const SimpleFilter& smpl) : Filter(smpl) {}
 
 /*Calls Filter's print function and then outputs information of the 
 Simple Filter */
@@ -32,7 +26,8 @@ ostream& SimpleFilter::print(ostream& out) const {
 /*Assignment operator:  calls the filter's assignment operator passing in the
  *simpleFilter info*/
 SimpleFilter& SimpleFilter::operator=(const SimpleFilter& smpl) {
-  Filter::operator=(smpl); //TODO - See if this is best practice
+  Filter::operator=(smpl);
+  return *this;
 }
 
 /*Calls the print function for the smpl class*/

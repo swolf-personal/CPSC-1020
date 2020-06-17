@@ -12,14 +12,15 @@ using namespace std;
  *so you only need to call the Base class constructor passing in the String
  *that represents the GrayScale class. You should use initialization list for 
  *this constructor*/
-GrayscaleFilter::GrayscaleFilter () {
+GrayscaleFilter::GrayscaleFilter () : PixelFilter("Greyscale Filter") {
 
 }
 
 /*This is the copy constructor.  Remember there is no data to set so simply
  *call the PixelFilter passing in right hand (parameter being passed in) sides 
  *name.  Use Initialzation list for this constructor*/
-GrayscaleFilter::GrayscaleFilter (const GrayscaleFilter& spf) {
+GrayscaleFilter::GrayscaleFilter (const GrayscaleFilter& spf) 
+: PixelFilter(spf.name) {
 
 }
 
@@ -29,23 +30,25 @@ GrayscaleFilter::GrayscaleFilter (const GrayscaleFilter& spf) {
 *It would be to your advantage to think about how  apply and apply_transform
 *work together. Apply belongs to the base class.  Which it's sole purp*/
 Pixel GrayscaleFilter::apply_transform(const Pixel& p) const {
-
+  uint8_t lum =  p.luminance();
+  return Pixel(lum,lum,lum);
 }
 
 /*This function first calls the base class' PixelFilter and then prints 
 * something saying the filter style is Grayscale. */
 ostream& GrayscaleFilter::print(ostream& out) const {
-  
+  return PixelFilter::print(out);
 }
 
 /*The only thing that needs to be done here is pass spf to the PixelFilter which
  *in turn will call filters operator=.  Depending on how you create instances
  *of GrayscaleFilter you may or may not need this. */
 GrayscaleFilter& GrayscaleFilter::operator=(const GrayscaleFilter& spf) {
-  
+  PixelFilter::operator=(spf);
+  return *this;
 }
 
 /*Calls the print function implemented above. */
 ostream& operator<< (ostream& out, const GrayscaleFilter& spf) {
- 
+ return spf.print(out);
 }

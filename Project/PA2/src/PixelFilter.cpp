@@ -12,17 +12,11 @@ using namespace std;
  *classes. */
 /*These are the constructors Use initilaztion list for these*/
 
-PixelFilter::PixelFilter () : Filter() {
+PixelFilter::PixelFilter () : Filter() {}
 
-}
+PixelFilter::PixelFilter (string name) : Filter(name) {}
 
-PixelFilter::PixelFilter (string name) : Filter(name) {
-
-  }
-
-PixelFilter::PixelFilter (const PixelFilter& pf) : Filter(pf) {
-
-}
+PixelFilter::PixelFilter (const PixelFilter& pf) : Filter(pf) {}
 
 /*call apply_transform to each pixel
 *This is a little tricky though.  The first thing you will do is determine the 
@@ -34,21 +28,26 @@ PixelFilter::PixelFilter (const PixelFilter& pf) : Filter(pf) {
 *class.  Keep in mine what x and y represent on a plane.  Y = rows and x = cols
 *So you are going have img(add params) = apply_transform(img(add Params));*/
 void PixelFilter::apply(Image& img) const {
-  
+  for(int x = 0; x < img.header().width(); x++) {
+    for(int y = 0; y < img.header().height(); y++) {
+      img(x,y) = apply_transform(img(x,y));
+    }
+  }
 }
 
 /*This callse the base class print function.  It also prints out something along
 *the lines Filter Type: Pixel*/
 ostream& PixelFilter::print(ostream& out) const {
-  
+  return Filter::print(out);
 }
 /*All this does is calles Filter = operator.  */
 PixelFilter& PixelFilter::operator=(const PixelFilter& pf) {
-  
+  Filter::operator=(pf);
+  return *this;
 }
 
 
 /*This function calls the PixelFilter's print function. */
 ostream& operator<< (ostream& out, const PixelFilter& pf) {
-  
+  return pf.print(out);
 }

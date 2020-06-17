@@ -5,7 +5,7 @@ CFLAGS=-Wall -g -std=c++11
 #Linker flags
 LFLAGS=-lm
 #Program args
-CARGS=testP3.ppm
+CARGS=suprise.ppm
 #Driver name
 TARGET=driver
 #Project Name

@@ -28,9 +28,9 @@ void VFlipFilter::apply(Image& img) const {
   Header hdr = img.header();
   Image imgCopy(img);
 
-  for(int x = 0; x < hdr.height()-1; x++) {
-      for(int y = 0; y < hdr.width()-1; y++) {
-          img(x,y) = imgCopy(((hdr.width()-1)-x), ((hdr.width()-1)-y));
+  for(int x = 0; x < hdr.width()-1; x++) {
+      for(int y = 0; y < hdr.height()-1; y++) {
+          img(x,y) = imgCopy(x, ((hdr.height()-1)-y));
       }
   }
 

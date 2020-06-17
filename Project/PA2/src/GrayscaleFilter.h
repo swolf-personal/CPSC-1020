@@ -4,6 +4,9 @@
  *wolf7@clemson.edu
  *************************/
 
+#ifndef GREYFILTER_H
+#define GREYFILTER_H
+
 #include "Image.h"
 #include "PixelFilter.h"
 #include <string>
@@ -31,3 +34,4 @@ class GrayscaleFilter : public PixelFilter {
     friend ostream& operator<< (ostream&, const GrayscaleFilter&);
 };
 
+#endif

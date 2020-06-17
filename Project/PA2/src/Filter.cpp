@@ -56,6 +56,7 @@ ostream& Filter::print(ostream& out) const {
 /*Assignment opreator.  Simply sets name to the name from f being passed in.*/
 Filter& Filter::operator=(const Filter& f) {
  name = f.name;
+ return *this;
 }
 
 /*Calls the print function that belings to f. (above)*/

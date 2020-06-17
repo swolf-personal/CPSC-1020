@@ -5,7 +5,7 @@
  *************************/
 
 #ifndef HFLIPFILTER_H
-#define FLIPFILTER_H
+#define HFLIPFILTER_H
 
 #include "Image.h"
 #include "SimpleFilter.h"

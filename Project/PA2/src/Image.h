@@ -1,6 +1,12 @@
 #ifndef IMAGE_H
 #define IMAGE_H 1
 
+/*************************
+ *Stephen Wolf
+ *CPSC 1020-001, Sp18
+ *wolf7@clemson.edu
+ *************************/
+
 #include "Header.h"
 #include "Pixel.h"
 #include <string>
@@ -29,7 +35,7 @@ class Image {
     // Constructors
     Image (ifstream&);
     Image (const Image& i);
-    ~Image ();
+    //~Image ();
 
     // Write to file
     void write_header(ofstream&) const;

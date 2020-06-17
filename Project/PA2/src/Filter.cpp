@@ -1,14 +1,25 @@
+/*************************
+ *Stephen Wolf
+ *CPSC 1020-001, Sp18
+ *wolf7@clemson.edu
+ *************************/
+
+#include "Filter.h"
+
+using namespace std;
+
+
 /*Filter is the top tier base class.  It is also an abstract class
  *it has one data member which represents the name of the the child class
  *since this is the default constructor set the name to an empty string
  you should  use initilization list here*/
-Filter::Filter() {
+Filter::Filter() : name("") {
 
 }
 
 /*This is the regular constructor.  Set name = to the name being passed in.
  *you should  use initilization list here*/
-Filter::Filter(string name)  {
+Filter::Filter(string name) : name(name)  {
 
 }
 
@@ -16,7 +27,7 @@ Filter::Filter(string name)  {
 /*This is the copy construct.  Again the only thing that needs to be set is the
 *name.  Use initializatin list and set the name to the name of f which is passed
 *to the constructor.*/
-Filter::Filter(const Filter& f) {
+Filter::Filter(const Filter& f) : name(f.name) {
 
 }
 
@@ -37,15 +48,18 @@ double Filter::clamp(double lo, double hi, double x) {
 *information when running the program .  Basically prints the word Filler: then
 *the name of the filter. the some - under it. */
 ostream& Filter::print(ostream& out) const {
-  
+  out << "Filter: " << name << endl;
+  out << "-----------------" << endl;
+  return out;
 }
 
 /*Assignment opreator.  Simply sets name to the name from f being passed in.*/
 Filter& Filter::operator=(const Filter& f) {
- 
+ name = f.name;
+ return *this;
 }
 
 /*Calls the print function that belings to f. (above)*/
 ostream& operator<< (ostream& out, const Filter& f) {
-
+  return f.print(out);
 }

@@ -1,3 +1,20 @@
+/*************************
+ *Stephen Wolf
+ *CPSC 1020-001, Sp18
+ *wolf7@clemson.edu
+ *************************/
+
+#ifndef SIMPLEFILTER_H
+#define SIMPLEFILTER_H
+
+#include "Image.h"
+#include "Filter.h"
+#include <string>
+#include <fstream>
+#include <vector>
+
+using namespace std;
+
 class SimpleFilter : public Filter {
   protected:
     // Derived classes need these visible
@@ -20,4 +37,4 @@ class SimpleFilter : public Filter {
     friend ostream& operator<< (ostream&, const SimpleFilter&);
 };
 
-
+#endif

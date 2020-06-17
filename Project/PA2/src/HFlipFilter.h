@@ -1,4 +1,19 @@
+/*************************
+ *Stephen Wolf
+ *CPSC 1020-001, Sp18
+ *wolf7@clemson.edu
+ *************************/
 
+#ifndef HFLIPFILTER_H
+#define HFLIPFILTER_H
+
+#include "Image.h"
+#include "SimpleFilter.h"
+#include <string>
+#include <fstream>
+#include <vector>
+
+using namespace std;
 
 class HFlipFilter : public SimpleFilter {
   public:
@@ -18,4 +33,4 @@ class HFlipFilter : public SimpleFilter {
     friend ostream& operator<< (ostream&, const HFlipFilter&);
 };
 
-
+#endif

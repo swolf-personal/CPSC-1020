@@ -1,3 +1,20 @@
+/*************************
+ *Stephen Wolf
+ *CPSC 1020-001, Sp18
+ *wolf7@clemson.edu
+ *************************/
+
+#ifndef SEPFILTER_H
+#define SEPFILTER_H
+
+
+#include "Image.h"
+#include "PixelFilter.h"
+#include <string>
+#include <fstream>
+#include <vector>
+
+using namespace std;
 
 class SepiaFilter : public PixelFilter {
   protected:
@@ -18,4 +35,4 @@ class SepiaFilter : public PixelFilter {
     friend ostream& operator<< (ostream&, const SepiaFilter&);
 };
 
-
+#endif

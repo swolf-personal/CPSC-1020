@@ -1,4 +1,19 @@
+/*************************
+ *Stephen Wolf
+ *CPSC 1020-001, Sp18
+ *wolf7@clemson.edu
+ *************************/
 
+#ifndef GREYFILTER_H
+#define GREYFILTER_H
+
+#include "Image.h"
+#include "PixelFilter.h"
+#include <string>
+#include <fstream>
+#include <vector>
+
+using namespace std;
 
 class GrayscaleFilter : public PixelFilter {
   protected:
@@ -19,3 +34,4 @@ class GrayscaleFilter : public PixelFilter {
     friend ostream& operator<< (ostream&, const GrayscaleFilter&);
 };
 
+#endif

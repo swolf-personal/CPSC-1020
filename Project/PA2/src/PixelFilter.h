@@ -1,3 +1,20 @@
+/*************************
+ *Stephen Wolf
+ *CPSC 1020-001, Sp18
+ *wolf7@clemson.edu
+ *************************/
+
+#ifndef PIXELFILTER_H
+#define PIXELFILTER_H
+
+#include "Image.h"
+#include "Filter.h"
+#include <string>
+#include <fstream>
+#include <vector>
+
+using namespace std;
+
 class PixelFilter : public Filter {
   protected:
     // Protected methods
@@ -21,3 +38,4 @@ class PixelFilter : public Filter {
     friend ostream& operator<< (ostream&, const PixelFilter&);
 };
 
+#endif

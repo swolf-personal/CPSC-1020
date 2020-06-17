@@ -33,7 +33,7 @@ int main(int argc, char const *argv[]) {
 
     hdr.readHeader(in);
 
-    pixels.resize(hdr.getWidth(), vector<Pixel>(hdr.getHeight()));
+    pixels.resize(hdr.getHeight(), vector<Pixel>(hdr.getWidth()));
 
     for(auto& pixelRow : pixels)
         for(auto& pixel : pixelRow)
@@ -49,7 +49,7 @@ int main(int argc, char const *argv[]) {
     for(auto& pixelRow : pixels)
         for(auto& pixel : pixelRow)
             pixel.writePixel(out);
-
+    
     out.close();
 
     return 0;

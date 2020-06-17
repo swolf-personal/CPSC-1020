@@ -24,11 +24,8 @@ using namespace std;
 
 class Menu {
   protected:
-    ifstream& in;
     vector<Filter*> filterList;
     vector<Filter*> filterQueue;
-    Image userImage;
-    static ifstream& getMeme(string);
 
   public:
     Menu();

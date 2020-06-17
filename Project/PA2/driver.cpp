@@ -16,8 +16,6 @@
 #include "src/GrayscaleFilter.h"
 #include "src/BinaryFilter.h"
 
-#include "src/menu.h"
-
 using namespace std;
 
 int main(int argc, char const *argv[]) {
@@ -29,11 +27,18 @@ int main(int argc, char const *argv[]) {
   Image mainImage(in);
   in.close();
 
+  vector<Filter*> filtersVec;
+
+  filtersVec.push_back(new HFlipFilter()); 
+  filtersVec.push_back(new VFlipFilter());
+  filtersVec.push_back(new SepiaFilter()); 
+  filtersVec.push_back(new GrayscaleFilter());
+  filtersVec.push_back(new BinaryFilter());
+
   //HORIZONTAL FLIP TEST
-  HFlipFilter hFilter;
   Image hFlipImg(mainImage);
 
-  hFilter.apply(hFlipImg);
+  filtersVec[0]->apply(hFlipImg);
 
   ofstream out("images/horizontal_100.ppm");
   if(!out) {
@@ -44,10 +49,9 @@ int main(int argc, char const *argv[]) {
   out.close();
 
   //VERTICAL FLIP TEST
-  VFlipFilter vFilter;
   Image vFlipImg(mainImage);
 
-  vFilter.apply(vFlipImg);
+  filtersVec[1]->apply(vFlipImg);
 
   out.open("images/vertical_100.ppm");
   if(!out) {
@@ -58,10 +62,9 @@ int main(int argc, char const *argv[]) {
   out.close();
 
   //SEP FILTER
-  SepiaFilter sFilter;
   Image sFiltImg(mainImage);
 
-  sFilter.apply(sFiltImg);
+  filtersVec[2]->apply(sFiltImg);
 
   out.open("images/sepia_100.ppm");
   if(!out) {
@@ -72,10 +75,9 @@ int main(int argc, char const *argv[]) {
   out.close();
 
   //Grey FILTER
-  GrayscaleFilter gFilter;
   Image gFiltImg(mainImage);
 
-  gFilter.apply(gFiltImg);
+  filtersVec[3]->apply(gFiltImg);
 
   out.open("images/grayscale_100.ppm");
   if(!out) {
@@ -86,10 +88,9 @@ int main(int argc, char const *argv[]) {
   out.close();
 
   //BIN FILTER
-  BinaryFilter bFilter(Pixel(12,37,199), Pixel(255,255,255));
   Image bFiltImg(mainImage);
 
-  bFilter.apply(bFiltImg);
+  filtersVec[4]->apply(bFiltImg);
 
   out.open("images/binary_100.ppm");
   if(!out) {
@@ -102,8 +103,8 @@ int main(int argc, char const *argv[]) {
   //BIN/HFLIP FILTER
   Image bhFiltImg(mainImage);
 
-  hFilter.apply(bhFiltImg);
-  bFilter.apply(bhFiltImg);
+  filtersVec[0]->apply(bhFiltImg);
+  filtersVec[4]->apply(bhFiltImg);
 
   out.open("images/bin_hf_100.ppm");
   if(!out) {
@@ -116,8 +117,8 @@ int main(int argc, char const *argv[]) {
   //SEP/VFLIP FILTER
   Image svFiltImg(mainImage);
 
-  hFilter.apply(svFiltImg);
-  sFilter.apply(svFiltImg);
+  filtersVec[0]->apply(svFiltImg);
+  filtersVec[2]->apply(svFiltImg);
 
   out.open("images/sep_vf_100.ppm");
   if(!out) {
@@ -132,8 +133,8 @@ int main(int argc, char const *argv[]) {
   //GRY/HFLIP FILTER
   Image ghFiltImg(mainImage);
 
-  gFilter.apply(ghFiltImg);
-  hFilter.apply(ghFiltImg);
+  filtersVec[3]->apply(ghFiltImg);
+  filtersVec[0]->apply(ghFiltImg);
 
   out.open("images/gs_hf_100.ppm");
   if(!out) {
@@ -146,8 +147,8 @@ int main(int argc, char const *argv[]) {
   //GRY/VFLIP FILTER
   Image gvFiltImg(mainImage);
 
-  gFilter.apply(gvFiltImg);
-  vFilter.apply(gvFiltImg);
+  filtersVec[3]->apply(gvFiltImg);
+  filtersVec[1]->apply(gvFiltImg);
 
   out.open("images/gs_vf_100.ppm");
   if(!out) {
@@ -160,8 +161,8 @@ int main(int argc, char const *argv[]) {
   //BIN/SEP FILTER
   Image bsFiltImg(mainImage);
 
-  bFilter.apply(bsFiltImg);
-  sFilter.apply(bsFiltImg);
+  filtersVec[4]->apply(bsFiltImg);
+  filtersVec[2]->apply(bsFiltImg);
 
   out.open("images/sep_bin_100.ppm");
   if(!out) {
@@ -171,9 +172,9 @@ int main(int argc, char const *argv[]) {
   bsFiltImg.write_to(out);
   out.close();
 
-  Menu newMenu;
-
-  //newMenu.terminalPrompt();
+  for(auto& filter: filtersVec) {
+    delete filter;
+  }
 
   return 0;
 }

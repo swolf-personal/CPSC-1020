@@ -14,6 +14,9 @@
 #include "src/VFlipFilter.h"
 #include "src/SepiaFilter.h"
 #include "src/GrayscaleFilter.h"
+#include "src/BinaryFilter.h"
+
+#include "src/menu.h"
 
 using namespace std;
 
@@ -32,7 +35,7 @@ int main(int argc, char const *argv[]) {
 
   hFilter.apply(hFlipImg);
 
-  ofstream out("hFlipTest.ppm");
+  ofstream out("images/horizontal_100.ppm");
   if(!out) {
       cout << "Output file failed to open!" << endl;
       return -1;
@@ -46,7 +49,7 @@ int main(int argc, char const *argv[]) {
 
   vFilter.apply(vFlipImg);
 
-  out.open("vFlipTest.ppm");
+  out.open("images/vertical_100.ppm");
   if(!out) {
       cout << "Output file failed to open!" << endl;
       return -1;
@@ -60,7 +63,7 @@ int main(int argc, char const *argv[]) {
 
   sFilter.apply(sFiltImg);
 
-  out.open("sFlitTest.ppm");
+  out.open("images/sepia_100.ppm");
   if(!out) {
       cout << "Output file failed to open!" << endl;
       return -1;
@@ -74,13 +77,103 @@ int main(int argc, char const *argv[]) {
 
   gFilter.apply(gFiltImg);
 
-  out.open("gFlitTest.ppm");
+  out.open("images/grayscale_100.ppm");
   if(!out) {
       cout << "Output file failed to open!" << endl;
       return -1;
   }
   gFiltImg.write_to(out);
   out.close();
+
+  //BIN FILTER
+  BinaryFilter bFilter(Pixel(12,37,199), Pixel(255,255,255));
+  Image bFiltImg(mainImage);
+
+  bFilter.apply(bFiltImg);
+
+  out.open("images/binary_100.ppm");
+  if(!out) {
+      cout << "Output file failed to open!" << endl;
+      return -1;
+  }
+  bFiltImg.write_to(out);
+  out.close();
+
+  //BIN/HFLIP FILTER
+  Image bhFiltImg(mainImage);
+
+  hFilter.apply(bhFiltImg);
+  bFilter.apply(bhFiltImg);
+
+  out.open("images/bin_hf_100.ppm");
+  if(!out) {
+      cout << "Output file failed to open!" << endl;
+      return -1;
+  }
+  bhFiltImg.write_to(out);
+  out.close();
+
+  //SEP/VFLIP FILTER
+  Image svFiltImg(mainImage);
+
+  hFilter.apply(svFiltImg);
+  sFilter.apply(svFiltImg);
+
+  out.open("images/sep_vf_100.ppm");
+  if(!out) {
+      cout << "Output file failed to open!" << endl;
+      return -1;
+  }
+  svFiltImg.write_to(out);
+  out.close();
+
+
+
+  //GRY/HFLIP FILTER
+  Image ghFiltImg(mainImage);
+
+  gFilter.apply(ghFiltImg);
+  hFilter.apply(ghFiltImg);
+
+  out.open("images/gs_hf_100.ppm");
+  if(!out) {
+      cout << "Output file failed to open!" << endl;
+      return -1;
+  }
+  ghFiltImg.write_to(out);
+  out.close();
+
+  //GRY/VFLIP FILTER
+  Image gvFiltImg(mainImage);
+
+  gFilter.apply(gvFiltImg);
+  vFilter.apply(gvFiltImg);
+
+  out.open("images/gs_vf_100.ppm");
+  if(!out) {
+      cout << "Output file failed to open!" << endl;
+      return -1;
+  }
+  gvFiltImg.write_to(out);
+  out.close();
+
+  //BIN/SEP FILTER
+  Image bsFiltImg(mainImage);
+
+  bFilter.apply(bsFiltImg);
+  sFilter.apply(bsFiltImg);
+
+  out.open("images/sep_bin_100.ppm");
+  if(!out) {
+      cout << "Output file failed to open!" << endl;
+      return -1;
+  }
+  bsFiltImg.write_to(out);
+  out.close();
+
+  Menu newMenu;
+
+  //newMenu.terminalPrompt();
 
   return 0;
 }

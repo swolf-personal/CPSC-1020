@@ -4,6 +4,9 @@
  *wolf7@clemson.edu
  *************************/
 
+#ifndef BINFILTER_H
+#define BINFILTER_H
+
 #include "Image.h"
 #include "PixelFilter.h"
 #include <string>
@@ -38,4 +41,4 @@ class BinaryFilter : public PixelFilter {
     friend ostream& operator<< (ostream&, const BinaryFilter&);
 };
 
-
+#endif

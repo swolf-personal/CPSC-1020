@@ -4,6 +4,10 @@
  *wolf7@clemson.edu
  *************************/
 
+#ifndef SEPFILTER_H
+#define SEPFILTER_H
+
+
 #include "Image.h"
 #include "PixelFilter.h"
 #include <string>
@@ -31,4 +35,4 @@ class SepiaFilter : public PixelFilter {
     friend ostream& operator<< (ostream&, const SepiaFilter&);
 };
 
-
+#endif

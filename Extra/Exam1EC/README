@@ -1,0 +1,10 @@
+I think my biggest challenge was combining my 
+ppm framework with the shape code. I had to make edits to
+the ways I accessed both to bring it in line with the 
+requirements and with the new code.
+
+I reworked most of my code to be reference based so I could
+easily draw in the pixels I needed to.
+
+I really liked this assignment because it was satisfying combining
+multiple projects to make something new.

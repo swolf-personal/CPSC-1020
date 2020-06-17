@@ -34,9 +34,22 @@ Triangle::Triangle(ifstream& in) : Shape("Triangle", count) {
     verts[1] = p2;
     verts[2] = p3;
 
+    int r=0,g=0,b=0;
+    in >> r >> g >> b;
+    this->r = r;
+    this->g = g;
+    this->b = b;
+
     count++;
 }
-Triangle::Triangle(Point, Point, Point) : Shape("Triangle", count) {count++;}
+Triangle::Triangle(Point A, Point B, Point C) 
+: Shape("Triangle", count) {
+    verts.resize(3);
+    verts[0] = A;
+    verts[1] = B;
+    verts[2] = C;
+    count++;
+}
 
 bool Triangle::isHit(const Point& pt) {
     double a = 

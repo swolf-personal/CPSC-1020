@@ -26,9 +26,14 @@ class Shape{
         string name;
         //The number in creation of the shape
         int id;
+        //Color of the shape
+        int r;
+        int g;
+        int b;
 
     public:
         //When created shapes are given a name and ID number
+        Shape();
         Shape(string, int);
         //Though no memory is allocated the compiler doesn't like
         //not having this for some reason.
@@ -41,6 +46,10 @@ class Shape{
         void printName(ostream&);
         //Returns the shape's ID number
         int getID();
+
+        int& getR();
+        int& getG();
+        int& getB();
 };
 
 #endif

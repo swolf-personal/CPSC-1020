@@ -20,12 +20,15 @@ Alex Myers
 #include "src/shape.h"
 #include "src/circle.h"
 #include "src/triangle.h"
+#include "src/quadrilateral.h"
+
+#include "src/Image.h"
 
 using namespace std;
 
 int main(int argc, char const *argv[]) {
     //Objects
-    vector<Point> points;
+    Image img;
     vector<Shape*> shapes;
 
     //Input files
@@ -34,12 +37,6 @@ int main(int argc, char const *argv[]) {
         cout << "Shapes file failed to open!" << endl;
         return -1;
     }
-    ifstream ptsIn(argv[2]);
-    if(!ptsIn){
-        cout << "Points file failed to open!" << endl;
-        return -1;
-    }
-
     //Read in shapes
     string shapeType = "";
     while (shapesIn >> shapeType) {
@@ -47,38 +44,32 @@ int main(int argc, char const *argv[]) {
             shapes.push_back(new Circle(shapesIn));
         } else if (shapeType == "Triangle") {
             shapes.push_back(new Triangle(shapesIn));
+        } else if (shapeType == "Quadrilateral") {
+            shapes.push_back(new Quadrilateral(shapesIn));
         } else {
             cout << "Invalid shape type encountered!" << endl;
             return -1;
         }
     }
-    //Read in points
-    double x = 0, y = 0;
-    while(ptsIn >> x >> y) {
-        points.push_back(Point(x,y));
-    }
     shapesIn.close();
-    ptsIn.close();
 
-    //Determine point intersections
-    int counter = 1;
-    for (auto& pt : points) {
-        bool anyHits = false;
-        cout << "Point: " << counter 
-        << " (" << pt.getX() << "," << pt.getY() << "):" << endl;
-        counter++;
-        for(Shape* shape : shapes) {
-            if(shape->isHit(pt)) {
-                cout << "\t";
-                shape->printName(cout);
-                cout << " #" << shape->getID() << endl;
-                anyHits = true;
+    //Draw in shapes
+    for(int x = 0; x < img.header().width(); x++) {
+        for (int y = 0; y < img.header().width(); y++) {
+            for(auto& shape : shapes) {
+                img.draw(x,y,shape);
             }
         }
-        if(!anyHits) {
-            cout << "\tNO HITS" << endl;
-        }
     }
+
+    //Output files
+    ofstream out("plswork.ppm");
+    if(!out){
+        cout << "Output file failed to open!" << endl;
+        return -1;
+    }
+    img.write_to(out);
+    out.close();
 
     //Free memory used in shape array
     for(Shape* shape : shapes) {

@@ -15,7 +15,9 @@ Alex Myers
 
 using namespace std;
 
-Shape::Shape(string nameIn = "Shape", int idIn = 0) 
+Shape::Shape() : name("Shape"), id(0) {}
+
+Shape::Shape(string nameIn, int idIn) 
 : name(nameIn), id(idIn) {}
 
 Shape::~Shape() {}
@@ -23,3 +25,7 @@ Shape::~Shape() {}
 void Shape::printName(ostream& out) {out << name;}
 
 int Shape::getID() {return id;}
+
+int& Shape::getR() {return r;}
+int& Shape::getG() {return g;}
+int& Shape::getB() {return b;}

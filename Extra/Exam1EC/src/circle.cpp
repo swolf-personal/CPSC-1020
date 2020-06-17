@@ -21,6 +21,13 @@ Circle::Circle(ifstream& in) : Shape("Circle", count) {
     double x = 0, y = 0;
     in >> x >> y;
     center.setPoint(x,y);
+
+    int r=0,g=0,b=0;
+    in >> r >> g >> b;
+    this->r = r;
+    this->g = g;
+    this->b = b;
+
     count++;
 }
 

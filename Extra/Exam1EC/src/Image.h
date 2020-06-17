@@ -57,8 +57,8 @@ class Image {
 
     //Color the pixel if the given pixel is in
     //the shape
-    //Param: int x, int y, Shape* | Return: void
-    void draw(int, int, Shape*);
+    //Param: Shape* Vector | Return: void
+    void draw(vector<Shape*>);
 };
 
 #endif

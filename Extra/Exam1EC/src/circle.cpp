@@ -14,10 +14,11 @@ using namespace std;
 int Circle::count = 1;
 
 Circle::Circle(ifstream& in) : Shape("Circle", count) {
+    pts.resize(1);
     in >> radius;
     double x = 0, y = 0;
     in >> x >> y;
-    center.setPoint(x,y);
+    pts.at(0).setPoint(x,y);
 
     int r=0,g=0,b=0;
     in >> r >> g >> b;
@@ -29,12 +30,12 @@ Circle::Circle(ifstream& in) : Shape("Circle", count) {
 }
 
 Circle::Circle(Point pt, int r = 1) 
-: Shape("Circle", count), center(pt), radius(r) {count++;}
+: Shape("Circle", count), radius(r) {pts.at(0) = pt; count++;}
 
 bool Circle::isHit(const Point& pt) {
     double loc = 
-    sqrt(((pt.getX() - center.getX())*(pt.getX() - center.getX())) 
-    + ((pt.getY() - center.getY())*(pt.getY() - center.getY())));
+    sqrt(((pt.getX() - pts.at(0).getX())*(pt.getX() - pts.at(0).getX())) 
+    + ((pt.getY() - pts.at(0).getY())*(pt.getY() - pts.at(0).getY())));
 
     if (loc <= radius)
         return true;

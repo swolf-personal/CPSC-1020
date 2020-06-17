@@ -21,8 +21,6 @@ class Triangle : public Shape {
     private:
         //The amount of triangles on the loose
         static int count;
-        //The three points that make up a triangle
-        vector<Point> verts;
     public:
         //Make a triangle from a text file;
         Triangle(ifstream& in);

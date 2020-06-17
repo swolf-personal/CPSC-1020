@@ -51,16 +51,10 @@ int main(int argc, char const *argv[]) {
     shapesIn.close();
 
     //Draw in shapes
-    for(int x = 0; x < img.header().width(); x++) {
-        for (int y = 0; y < img.header().width(); y++) {
-            for(auto& shape : shapes) {
-                img.draw(x,y,shape);
-            }
-        }
-    }
+    img.draw(shapes);
 
     //Output files
-    ofstream out("plswork.ppm");
+    ofstream out(argv[2]);
     if(!out){
         cout << "Output file failed to open!" << endl;
         return -1;

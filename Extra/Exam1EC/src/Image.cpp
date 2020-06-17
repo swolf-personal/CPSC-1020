@@ -113,7 +113,8 @@ vector<Pixel> Image::create_pixels(const Header& hdr) {
   return pixels;
 }
 
-/*These are self explanatory.  They simply set the magic number to either P3 or P6*/
+/*These are self explanatory.  
+They simply set the magic number to either P3 or P6*/
 void Image::make_p3 () { this->HDR.magic() = "P3"; }
 void Image::make_p6 () { this->HDR.magic() = "P6"; }
 
@@ -141,8 +142,15 @@ void Image::write_to (ofstream& out) const {
   }
 }
 
-void Image::draw(int x, int y, Shape* sp) {
-  if(sp->isHit(Point(x,y))) {
-      operator()(x,y) = Pixel(sp->getR(),sp->getG(),sp->getB());
+void Image::draw(vector<Shape*> shapes) {
+
+  for(int x = 0; x < header().width(); x++) {
+    for (int y = 0; y < header().width(); y++) {
+      for(auto& sp : shapes) {
+        if(sp->isHit(Point(x,y))) {
+          operator()(x,y) = Pixel(sp->getR(),sp->getG(),sp->getB());
+        }
+      }
+    }
   }
 }

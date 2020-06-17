@@ -5,11 +5,11 @@ CFLAGS=-Wall -g -std=c++11
 #Linker flags
 LFLAGS=-lm
 #Program args
-CARGS=input/shapes.txt
+CARGS=input/shapes.txt out.ppm
 #Driver name
 TARGET=driver
 #Name of the assignment
-PROJECT=Exam1
+PROJECT=Exam1EC
 
 
 #Dynamically find all source files, even in nested dirs

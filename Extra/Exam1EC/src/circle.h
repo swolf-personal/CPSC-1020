@@ -22,8 +22,6 @@ class Circle : public Shape {
     private:
         //The amount of circle that have been brought into this world
         static int count;
-        //The center point
-        Point center;
         //Radius of the circle
         double radius;
         

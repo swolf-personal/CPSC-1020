@@ -23,6 +23,8 @@ class Shape{
         string name;
         //The number in creation of the shape
         int id;
+        //Standard container or points. Resized in child
+        vector<Point> pts;
         //Color of the shape
         int r;
         int g;

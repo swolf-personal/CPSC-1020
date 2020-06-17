@@ -23,11 +23,6 @@ class Quadrilateral: public Shape {
     private:
         //Amt of quads
         static int count;
-        //The four points that make up a quad
-        Point A;
-        Point B;
-        Point C;
-        Point D;
     public:
         //Make a quad from an input stream
         Quadrilateral(ifstream&);

@@ -1,11 +1,8 @@
-/* -------------------- /
-Stephen Wolf
-wolf7
-Lab 9
-Section: 001
-Nushrat Humaira
-Alex Myers
-/ -------------------- */
+/*************************
+ *Stephen Wolf
+ *CPSC 1020-001, Sm20
+ *wolf7@clemson.edu
+ *************************/
 
 #include "point.h"
 #include "shape.h"

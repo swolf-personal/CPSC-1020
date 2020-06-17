@@ -1,3 +1,9 @@
+/*************************
+ *Stephen Wolf
+ *CPSC 1020-001, Sm20
+ *wolf7@clemson.edu
+ *************************/
+
 #ifndef PIXEL_H
 #define PIXEL_H 
 

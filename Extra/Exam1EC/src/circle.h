@@ -34,6 +34,7 @@ class Circle : public Shape {
         Circle(Point, int);
 
         //Determine if a point is within the circle
+        //Param: Point& | Return: bool
         bool isHit(const Point&);
 };
 

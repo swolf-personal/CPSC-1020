@@ -18,6 +18,7 @@ class Pixel {
     uint8_t R, G, B;
 
   public:
+    //Constructors
     Pixel ();
     Pixel (const Pixel&);
     Pixel (Pixel&&);

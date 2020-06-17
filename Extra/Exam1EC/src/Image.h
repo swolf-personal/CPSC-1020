@@ -18,13 +18,14 @@ using namespace std;
 
 class Image {
   private:
+    //Image header
     Header HDR;
+    //Image's pixels in 1D array
     vector<Pixel> PIX;
 
     /* Since these are in private space it means these are not allowed to 
      * actually be able to use in main or somewhere outside of the class.
-     * Disallow default and assignment*/
-    //Image () {};
+     * Disallow assignment*/
     Image& operator=(const Image& rhs);
 
     // Used by Constructors to build Image
@@ -39,7 +40,6 @@ class Image {
     Image(int, int);
     Image (ifstream&);
     Image (const Image& i);
-    //~Image ();
 
     // Write to file
     void write_header(ofstream&) const;
@@ -48,14 +48,16 @@ class Image {
     void make_p6();
 
     // const accessor, dont let someone change the Pixel*
-    // otherwise memory leaks.
     const Header& header() const;
     const vector<Pixel>& getPixels() const;
     vector<Pixel>& pixels();
 
-    // Allow us to change a pixel... might be a bad idea
+    //Make changes to a pixel by reference
     Pixel& operator()(int, int);
 
+    //Color the pixel if the given pixel is in
+    //the shape
+    //Param: int x, int y, Shape* | Return: void
     void draw(int, int, Shape*);
 };
 

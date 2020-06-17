@@ -44,6 +44,7 @@ class Shape{
         //Returns the shape's ID number
         int getID();
 
+        //Reference style getter
         int& getR();
         int& getG();
         int& getB();

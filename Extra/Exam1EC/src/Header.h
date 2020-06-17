@@ -17,9 +17,13 @@ private:
     int W, H, MC;
 
   public:
+    //Create a default header
     Header ();
+    //Copy constructor
     Header (const Header& HDR);
+    //Fully paramitized constructor
     Header (string m, int w, int h, int mc);
+    //Destructor
     ~Header ();
 
     // Value getter, use only these for immutable headers
@@ -28,12 +32,8 @@ private:
     int height() const;
     int max_color() const;
 
-    /*I am not sure what this is for but you may want to add setters if you 
-     *need them. This returns a reference to a variable allowing you to change
-     *a value of the data member using the reference.  You may or may not use
-     *this.  There are no setter you may want to create setters rather than 
-     * use a reference.  */
-    // Ref getter 
+    //The next four are ref getters
+    //This allows pythonic style access
     string& magic();
     int& width();
     int& height();
